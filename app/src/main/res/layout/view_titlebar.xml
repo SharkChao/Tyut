@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lenovohit.administrator.tyutclient.view.TitleBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:fitsSystemWindows="true"
+    android:background="@color/red">
+
+        <ImageView
+            android:id="@+id/base_titlebar_back"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@mipmap/back1" />
+
+        <TextView
+            android:id="@+id/base_titlebar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="中心"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_alignBaseline="@+id/base_titlebar_back"
+            android:layout_alignBottom="@+id/base_titlebar_back"
+            android:layout_centerHorizontal="true" />
+
+
+        <TextView
+            android:id="@+id/base_titlebar_rtbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="右侧"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="#D4D0C8" />
+
+</com.lenovohit.administrator.tyutclient.view.TitleBar>

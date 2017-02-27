@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#FF0000</color>
+    <color name="q_gray">#DEDEDE</color>
+    <color name="s_gray">#bfbfbf</color>
+    <color name="gray">#8c8c8c</color>
+    <color name="gray_1">#5c5c5c</color>
+    <color name="gray_2">#a1a3a6</color>
+    <color name="gray_3">#f3f3f3</color>
+    <color name="black">#FF000000</color>
+    <color name="description_gray">#666666</color>
+    <color name="gray_dark">#FF404040</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="alpha_white">#50FFFFFF</color>
+    <color name="green">#FF00FF00</color>
+    <color name="orange">#F8931D</color>
+    <color name="q_blue">#557bbfea</color>
+    <color name="s_blue">#67B0EC</color>
+
+    <color name="divider">#28dbd4</color>
+    <color name="transparent">#00000000</color>
+    <color name="app_bj_colors">#f4f4f4</color>
+    <color name="app_line_colors">#cccccc</color>
+    <color name="app_item_press_colors">#b3b3b3</color>
+    <color name="app_theme_colors">#BE0F0F</color>
+    <color name="tobbar_colors">#2070AF</color>
+    <color name="bottom_colors">#fdfdfd</color>
+    <color name="bottom_text_normal_colors">#6B6B6B</color>
+    <color name="bottom_text_press_colors">#3CD2CE</color>
+    <color name="q_image_title">#87B206</color>
+    <color name="q_gray_light">#c4e3f3</color>
+    <color name="q_blue_light">#c4e3f3</color>
+    <color name="h_image_title">#ECC200</color>
+    <color name="wheel_colors">#F021202E</color>
+    <color name="btn_logout_normal_colors">#CF2A27</color>
+    <color name="btn_logout_press_colors">#8D1B19</color>
+    <color name="btn_complete_normal_colors">#CF2A27</color>
+    <color name="btn_complete_press_colors">#BE0F0F</color>
+    <color name="btn_colors_press">#BE0F0F</color>
+    <color name="btn_colors_normal">#CF2A27</color>
+    <color name="btn_gray_colors_normal">#D6D6D6</color>
+    <color name="btn_gray_colors_press">#F4F4F4</color>
+    <color name="navigation_title_color">#b2d1eb</color>
+    <color name="biankuang_red_color">#ffd99694</color>
+    <color name="biankuang_green_color">#96c136</color>
+    <color name="biankuang_green2_color">#ffc3d69b</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="main_bottom_press_colors">#D04b4b4b</color>
+    <color name="list_bg1">#f0f0f0</color>
+    <color name="txtblue">#2468a2</color>
+    <color name="bg">#F4F4F4</color>
+    <color name="c_qiandao_bg">#55FFFACD</color>
+    <color name="list_item_bg">#f0f0f0</color>
+    <!-- #f0f0f0 -->
+    <color name="sidebar_color">#777bbfea</color>
+    <color name="shihuang">#c99979</color>
+    <color name="q_yellow_light">#c9b43f</color>
+
+    <!-- 浅蓝 -->
+    <color name="q_blue_normal">#52C1C7</color>
+    <color name="q_blue_press">#46ACB3</color>
+    <!-- 深蓝 -->
+    <color name="s_blue_normal">#71A9DA</color>
+    <color name="s_blue_press">#5C98C9</color>
+    <!-- 浅紫色 -->
+    <color name="q_purple_normal">#BE98CB</color>
+    <color name="q_purple_press">#AA808B</color>
+    <!-- 浅绿色 -->
+    <color name="q_green_normal">#80BF78</color>
+    <color name="q_green_press">#6AAA61</color>
+    <!-- 橙色 -->
+    <color name="q_orange_normal">#EC8363</color>
+    <color name="q_orange_press">#D86F4F</color>
+    <!-- 黄色 -->
+    <color name="q_yellow_normal">#DDB555</color>
+    <color name="q_yellow_press">#CFA940</color>
+    <!-- 深紫色 -->
+    <color name="s_purple_normal">#9485E0</color>
+    <color name="s_purple_press">#796FCC</color>
+    <!-- 粉红色 -->
+    <color name="s_pink_normal">#E986B5</color>
+    <color name="s_pink_press">#D56D9C</color>
+    <!-- 深绿色 -->
+    <color name="s_green_normal">#4CBE8B</color>
+    <color name="s_green_press">#3FB07C</color>
+
+    <color name="s_light_green_background">#38C6DA</color>
+
+    <!-- 半透明黑色-->
+    <color name="translucent_black">#99323232</color>
+
+
+
+
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
+
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+</resources>
