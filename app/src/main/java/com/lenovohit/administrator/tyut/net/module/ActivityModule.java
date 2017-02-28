@@ -5,4 +5,5 @@ package com.lenovohit.administrator.tyut.net.module;
  */
 
 public class ActivityModule {
+
 }

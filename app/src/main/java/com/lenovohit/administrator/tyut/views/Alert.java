@@ -12,7 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lenovohit.administrator.tyutclient.R;
+import com.lenovohit.administrator.tyut.R;
+
 
 /**
  * Created by Administrator on 2017/2/8.

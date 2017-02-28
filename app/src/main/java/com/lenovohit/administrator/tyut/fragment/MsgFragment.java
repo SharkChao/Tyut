@@ -3,8 +3,9 @@ package com.lenovohit.administrator.tyut.fragment;
 import android.content.Context;
 import android.view.View;
 
-import com.lenovohit.administrator.tyutclient.R;
-import com.lenovohit.administrator.tyutclient.view.TitleBar;
+import com.lenovohit.administrator.tyut.R;
+import com.lenovohit.administrator.tyut.views.TitleBar;
+
 
 
 /**
@@ -22,10 +23,6 @@ public class MsgFragment extends BaseFragment {
     @Override
     public View initView() {
         View v=View.inflate(context, R.layout.fragment_msg,null);
-        titleBar = (TitleBar) v.findViewById(R.id.titlebar);
-        titleBar.setRTBtnVisiable(View.GONE);
-        titleBar.setTitle("公司介绍");
-        titleBar.setLFBtnVisiable(View.GONE);
         return v;
     }
     @Override

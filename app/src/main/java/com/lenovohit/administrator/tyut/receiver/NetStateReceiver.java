@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.lenovohit.administrator.tyutclient.utils.NetworkUtil;
+import com.lenovohit.administrator.tyut.utils.NetworkUtil;
 
 
 /**
