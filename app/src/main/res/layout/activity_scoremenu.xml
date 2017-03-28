@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/scoreback">
+
+
+    <!--<com.zhy.view.CircleMenuLayout-->
+    <!--android:id="@+id/id_menulayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--&gt;-->
+
+    <!--<RelativeLayout-->
+    <!--android:id="@id/id_circle_menu_item_center"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="80.0dip"-->
+    <!--android:layout_height="80.0dip"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:background="@mipmap/logo" />-->
+    <!--</RelativeLayout>-->
+    <!--</com.zhy.view.CircleMenuLayout>-->
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ben"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本学期成绩" />
+
+        <TextView
+            android:id="@+id/suo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有成绩" />
+
+        <TextView
+            android:id="@+id/shang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上学期成绩" />
+
+        <TextView
+            android:id="@+id/bu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不及格成绩" />
+
+
+    </LinearLayout>
+
+    <com.lenovohit.administrator.tyut.views.WaveView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"></com.lenovohit.administrator.tyut.views.WaveView>
+</RelativeLayout>

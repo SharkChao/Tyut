@@ -35,4 +35,9 @@ public class MeFragment extends BaseFragment {
     @Override
     public void initEvent() {
     }
+
+    @Override
+    public void loadData() {
+
+    }
 }

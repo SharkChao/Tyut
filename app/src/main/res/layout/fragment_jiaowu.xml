@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_pic"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/a" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#8000"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/tvHosName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="太原理工大学"
+                android:textColor="#fff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvGuide1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHosName"
+                android:layout_marginLeft="5dp"
+                android:text="211工程"
+                android:textColor="#fff"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="27000"
+                    android:textColor="#fff"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学生"
+                    android:textColor="#fff"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_local"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_pic"
+        android:layout_marginTop="3dp"
+        android:background="#fff"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/tvLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/local"
+            android:drawablePadding="5dp"
+            android:text="山西省太原市迎泽西大街79号"
+            android:textColor="#000"
+            android:textSize="@dimen/font_size_B1" />
+
+        <ImageView
+            android:id="@+id/ivPhone"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/phone" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:layout_toLeftOf="@id/ivPhone"
+            android:background="@android:color/darker_gray" />
+    </RelativeLayout>
+    <GridView android:id="@+id/gvGuide"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_below="@id/rl_local" android:layout_marginTop="10dp"
+        android:horizontalSpacing="2dp" android:numColumns="2"
+        android:background="#fff"
+        android:scrollbars="none"
+        android:padding="10dp"
+        android:verticalSpacing="2dp">
+    </GridView>
+
+</LinearLayout>

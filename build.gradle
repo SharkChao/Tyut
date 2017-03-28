@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
 
         // 添加android-apt 插件
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -14,8 +14,11 @@ buildscript {
 
         //butterknifek控件
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+        //greendao
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
     }
 }
+
 
 allprojects {
     repositories {
@@ -24,6 +27,7 @@ allprojects {
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         //recycle第三方库
         maven { url "https://jitpack.io" }
+
     }
 }
 

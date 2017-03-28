@@ -1,5 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+<dimen name="font_size_A">12.0sp</dimen>
+<dimen name="font_size_B">15.0sp</dimen>
+<dimen name="font_size_B1">14.31sp</dimen>
+<dimen name="font_size_A1">10.22sp</dimen>
+<dimen name="font_size_C">18.0sp</dimen>
+<dimen name="font_size_D">20.0sp</dimen>
+<dimen name="font_size_E">22.0sp</dimen>
+<dimen name="app_interval_5">5dip</dimen>
+<dimen name="app_interval_10">10dip</dimen>
+<dimen name="app_interval_15">15dip</dimen>
+<dimen name="app_interval_20">20dip</dimen>
+<dimen name="app_interval_25">25dip</dimen>
+<dimen name="app_interval_30">30dip</dimen>
+<dimen name="app_interval_40">40dip</dimen>
+<dimen name="mian_line">14dip</dimen>
+<dimen name="postion_view_width">36dp</dimen>
+<dimen name="postion_view_height">57.3dp</dimen>
+<dimen name="map_pop_view_height">123.3dp</dimen>
+<dimen name="map_pop_view_width">250dip</dimen>
+<dimen name="foot_view_height">55dp</dimen>
+<dimen name="navigation_mode_font">16.0sp</dimen>
+<dimen name="line">0.5dp</dimen>
+<dimen name="activity_horizontal_margin">16dp</dimen>
+<dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

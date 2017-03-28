@@ -144,7 +144,7 @@ public class Alert {
 
         if (!showPosBtn && !showNegBtn) {
             btn_pos.setText("确定");
-            btn_pos.setVisibility(View.VISIBLE);
+            btn_pos.setVisibility(View.GONE);
             btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
             btn_pos.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -176,6 +176,9 @@ public class Alert {
     public void show() {
         setLayout();
         dialog.show();
+    }
+    public void dismiss(){
+        dialog.dismiss();
     }
 
 

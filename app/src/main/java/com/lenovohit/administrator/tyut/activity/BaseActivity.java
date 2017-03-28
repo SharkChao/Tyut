@@ -1,15 +1,23 @@
 package com.lenovohit.administrator.tyut.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
+
+import com.lenovohit.administrator.tyut.receiver.NetStateReceiver;
+import com.lenovohit.administrator.tyut.receiver.Observer;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2017/2/21.
  */
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity implements Observer{
 
+    public static Activity currentActivity;
+    private NetStateReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +29,9 @@ public abstract class BaseActivity extends FragmentActivity {
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 //        }
+        receiver = new NetStateReceiver();
+        receiver.registerObserver(this);
+        currentActivity=this;
         initView();
         initDate();
         initEvent();
@@ -29,6 +40,7 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.bind(this);
         initBaseView();
     }
 
@@ -40,4 +52,10 @@ public abstract class BaseActivity extends FragmentActivity {
     public abstract void initDate();
 
     public abstract void initEvent();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        receiver.UnRegisterObserver(this);
+    }
 }
