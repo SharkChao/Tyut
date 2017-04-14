@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.adapter.MyBasePageAdapter;
+import com.lenovohit.administrator.tyut.views.Alert;
 
 import butterknife.Bind;
 
@@ -48,19 +49,24 @@ public class HomeActivity extends BaseActivity {
                 switch (checkedId) {
                     case R.id.rbHome:
                         viewPager.setCurrentItem(0);
+                        relativeLayout.setVisibility(View.VISIBLE);
                         tvTitle.setText("新闻");
                         break;
                     case R.id.rbHospal:
                         viewPager.setCurrentItem(1);
+                        relativeLayout.setVisibility(View.VISIBLE);
                         tvTitle.setText("教务管理");
                         break;
                     case R.id.rbUse:
                         viewPager.setCurrentItem(2);
-                        tvTitle.setText("学习资料");
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        tvTitle.setText("聊天");
+                        relativeLayout.setVisibility(View.GONE);
                         break;
                     case R.id.rbMy:
                         viewPager.setCurrentItem(3);
                         tvTitle.setText("我的");
+                        relativeLayout.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -80,5 +86,23 @@ public class HomeActivity extends BaseActivity {
     }
     public static  void StartHomeActivity(Context context){
         context.startActivity(new Intent(context,HomeActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Alert alert=new Alert(this);
+        alert.builder().setTitle("退出").setMsg("确认退出吗?").setPositiveButton("确认",new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                finish();
+                cn.bmob.v3.BmobUser.logOut();
+            }
+        }).setNegativeButton("取消", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        }).show();
     }
 }

@@ -10,7 +10,7 @@ import com.lenovohit.administrator.tyut.activity.BaseActivity;
  * Created by Administrator on 2017/3/13.
  * 我们需要了解到ViewHolder的作用。
  * 提供view中的各个控件，并且只需要findviewById一次就可以了
- * 所以   viewholder需要我们提供 view，以及一个arraylist包含每个小控件。
+ * 所以  viewholder需要我们提供 view，以及一个arraylist包含每个小控件。
  */
 
 public class BaseViewHolder {

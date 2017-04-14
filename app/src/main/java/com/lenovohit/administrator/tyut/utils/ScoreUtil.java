@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.lenovohit.administrator.tyut.activity.LoginActivity;
+import com.lenovohit.administrator.tyut.app.AppManager;
 import com.lenovohit.administrator.tyut.constant.Constant;
 import com.lenovohit.administrator.tyut.data.ScoreData;
 import com.lenovohit.administrator.tyut.greendao.Score;
@@ -52,7 +53,10 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "网络错误，请重新连接网络" + e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
+                        AppManager appManager = AppManager.getAppManager();
+                        appManager.finishAllActivity();
+                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -108,7 +112,10 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "网络错误，请重新连接网络" + e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
+                        AppManager appManager = AppManager.getAppManager();
+                        appManager.finishAllActivity();
+                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -198,7 +205,10 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "网络错误，请重新连接网络" + e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
+                        AppManager appManager = AppManager.getAppManager();
+                        appManager.finishAllActivity();
+                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -281,7 +291,10 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "网络错误，请重新连接网络" + e, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
+                        AppManager appManager = AppManager.getAppManager();
+                        appManager.finishAllActivity();
+                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -377,7 +390,8 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, e + "...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,   "身份信息过期，请重新登录", Toast.LENGTH_SHORT).show();
+                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override

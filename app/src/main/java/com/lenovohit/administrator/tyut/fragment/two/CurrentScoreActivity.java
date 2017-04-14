@@ -2,28 +2,30 @@ package com.lenovohit.administrator.tyut.fragment.two;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.BaseActivity;
 import com.lenovohit.administrator.tyut.adapter.CommenAdapter;
 import com.lenovohit.administrator.tyut.app.MyApp;
 import com.lenovohit.administrator.tyut.constant.Constant;
 import com.lenovohit.administrator.tyut.data.ScoreData;
+import com.lenovohit.administrator.tyut.greendao.DaoManager;
+import com.lenovohit.administrator.tyut.greendao.DaoSession;
 import com.lenovohit.administrator.tyut.greendao.Score;
+import com.lenovohit.administrator.tyut.greendao.ScoreDao;
+import com.lenovohit.administrator.tyut.greendao.User;
 import com.lenovohit.administrator.tyut.net.service.UserService;
 import com.lenovohit.administrator.tyut.utils.EventUtil;
 import com.lenovohit.administrator.tyut.utils.ScoreUtil;
-import com.lenovohit.administrator.tyut.utils.SpUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,10 @@ public class CurrentScoreActivity extends BaseActivity implements SwipeRefreshLa
             TextView textView;
     List<Score>list=new ArrayList<>();
     private CommenAdapter<Score> adapter;
-
+    private User user;
+    private ScoreDao scoreDao;
+    //和数据库交互的list
+    private List<Score>list8=new ArrayList<>();
     @Override
     public void Update(Boolean isConnection) {
 
@@ -83,35 +88,33 @@ public class CurrentScoreActivity extends BaseActivity implements SwipeRefreshLa
 
     @Override
     public void initDate() {
-        getCurrentScore();
+
+        user = MyApp.getUser();
+        DaoManager instance = DaoManager.getInstance(this);
+        DaoSession session = instance.getSession();
+        scoreDao = session.getScoreDao();
     }
 
     @Override
     public void initEvent() {
-
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
+        getCurrentScore();
     }
 
     /**
      * 发送请求到学校接口，获取本学期成绩
      */
     public void getCurrentScore(){
-
-        Gson gson = new Gson();
-        String cache = (String) SpUtil.getParam(this, "currentscore", "");
-        if (TextUtils.isEmpty(cache)) {
+        List<Score> scores = queryData();
+        if (scores.size()==0){
             ScoreUtil.getCurrentScore(service,this);
-            textView.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.INVISIBLE);
-        } else {
-            List<Score> score = gson.fromJson(cache, new TypeToken<List<Score>>() {
-            }.getType());
-            if (score.size() != 0) {
-                listView.setVisibility(View.VISIBLE);
-                textView.setVisibility(View.INVISIBLE);
-                list.clear();
-                list.addAll(score);
-                adapter.notifyDataSetChanged();
-            }
+        }else {
+            listView.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.INVISIBLE);
+            list.clear();
+            list.addAll(scores);
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -123,18 +126,24 @@ public class CurrentScoreActivity extends BaseActivity implements SwipeRefreshLa
         switch (code){
             case Constant.CurrentScoreUrl:
                 list= ScoreData.getList1();
+                list8.clear();
                if (list.size()==0){
                    listView.setVisibility(View.INVISIBLE);
                    textView.setVisibility(View.VISIBLE);
                }else {
-                   SpUtil.setParam(this,"currentscore",list);
                    textView.setVisibility(View.INVISIBLE);
                    listView.setVisibility(View.VISIBLE);
+                   for (Score score:list){
+                       list8.add(new Score(null,user.getAccount(),score.getTitle(),score.getXuefen(),score.getChengji(),"ben",false));
+                   }
+                   insertData(list8);
+               }
+               if (adapter!=null){
+                   adapter.notifyDataSetChanged();
                }
                 if (swipeRefreshLayout.isRefreshing()){
                     swipeRefreshLayout.setRefreshing(false);
                 }
-                adapter.notifyDataSetChanged();
                 break;
         }
     }
@@ -146,6 +155,29 @@ public class CurrentScoreActivity extends BaseActivity implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        getCurrentScore();
+        ScoreUtil.getCurrentScore(service,this);
+    }
+    /**
+     * 查询数据库中的本学期成绩
+     */
+    public List<Score> queryData(){
+
+        QueryBuilder<Score> qb = scoreDao.queryBuilder();
+        qb.where(qb.and(ScoreDao.Properties.Username.eq(user.getAccount()),ScoreDao.Properties.Flag.eq("ben")));
+        List<Score> list = qb.list();
+        return list;
+    }
+    /**
+     * 把本学期成绩插入到数据库中
+     */
+    public void insertData(List<Score>list){
+        List<Score> scores = queryData();
+        if (scores.size()==0){
+            scoreDao.insertInTx(list);
+        }else {
+            scoreDao.deleteInTx(scores);
+            scoreDao.insertInTx(list);
+        }
     }
 }
+

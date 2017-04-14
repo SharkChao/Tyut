@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lenovohit.administrator.tyut">
-
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!--允许联网 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
@@ -74,23 +75,21 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/rc_file_path" />
         </provider>
-        <!--会话列表-->
-        <activity
-            android:name=".fragment.three.ConversationListActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-
+        <receiver android:name=".receiver.SealNotificationReceiver"></receiver>
+        <activity android:name=".fragment.three.HuiHuaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
                     android:host="com.lenovohit.administrator.tyut"
-                    android:pathPrefix="/conversationlist"
+                    android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+        <activity android:name=".fragment.three.FindFriendActivity"></activity>
+        <activity android:name=".fragment.three.StudentInfoActivity"></activity>
+        <activity android:name=".fragment.four.StudentInfoSetActivity"></activity>
     </application>
 
 </manifest>

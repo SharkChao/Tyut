@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-10dp">
+        <com.mingle.widget.LoadingView
+            android:id="@+id/loadView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            />
+        <TextView
+            android:id="@+id/tvConn"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#f00"
+            android:gravity="center"
+            android:text="网络正常"
+            android:visibility="invisible" />
+
+        <WebView
+            android:id="@+id/webview"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+
+    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentTop="true"
         android:background="#fff"
         android:padding="5dp">
@@ -39,29 +66,4 @@
             android:background="@null" />
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.mingle.widget.LoadingView
-            android:id="@+id/loadView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            />
-        <TextView
-            android:id="@+id/tvConn"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#f00"
-            android:gravity="center"
-            android:text="网络正常"
-            android:visibility="invisible" />
-
-        <WebView
-            android:id="@+id/webview"
-            android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -27,4 +27,7 @@ public class StringUtil {
         } while (beginIndexFlag || endIndexFlag);
         return source;
     }
+    public static boolean isStrEmpty(String var0) {
+        return var0 != null && !"".equals(var0.trim())?(var0 = var0.replaceAll(" ", "").trim()) == null || "".equals(var0.trim()):true;
+    }
 }

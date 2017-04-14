@@ -27,28 +27,37 @@
         android:id="@+id/linearlayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/ben"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:textColor="@color/black"
             android:text="本学期成绩" />
 
         <TextView
             android:id="@+id/suo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:textColor="@color/black"
             android:text="所有成绩" />
 
         <TextView
             android:id="@+id/shang"
+            android:padding="30dp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="上学期成绩" />
 
         <TextView
+            android:padding="30dp"
             android:id="@+id/bu"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="不及格成绩" />

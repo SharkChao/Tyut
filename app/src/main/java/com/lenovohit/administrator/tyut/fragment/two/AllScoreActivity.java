@@ -6,11 +6,8 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.BaseActivity;
 import com.lenovohit.administrator.tyut.adapter.ScoreAdapter;
@@ -18,14 +15,18 @@ import com.lenovohit.administrator.tyut.app.MyApp;
 import com.lenovohit.administrator.tyut.constant.Constant;
 import com.lenovohit.administrator.tyut.data.ScoreData;
 import com.lenovohit.administrator.tyut.domain.MySection;
+import com.lenovohit.administrator.tyut.greendao.DaoManager;
+import com.lenovohit.administrator.tyut.greendao.DaoSession;
 import com.lenovohit.administrator.tyut.greendao.Score;
+import com.lenovohit.administrator.tyut.greendao.ScoreDao;
+import com.lenovohit.administrator.tyut.greendao.User;
 import com.lenovohit.administrator.tyut.net.service.UserService;
 import com.lenovohit.administrator.tyut.utils.EventUtil;
 import com.lenovohit.administrator.tyut.utils.ScoreUtil;
-import com.lenovohit.administrator.tyut.utils.SpUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +56,8 @@ public class AllScoreActivity extends BaseActivity implements SwipeRefreshLayout
     List<Score> list1 = new ArrayList<>();
     //成绩
     Map<String,List<Score>>map=new HashMap<>();
+    //用来往数据库中存放
+    List<Score>list8=new ArrayList<>();
     private ScoreAdapter adapter;
 
     @Override
@@ -89,20 +92,26 @@ public class AllScoreActivity extends BaseActivity implements SwipeRefreshLayout
      * 发送请求到学校接口，获取本学期成绩
      */
     public void getCurrentScore() {
-        Gson gson = new Gson();
-        String cache = (String) SpUtil.getParam(this, "allscore", "");
-        if (TextUtils.isEmpty(cache)&&cache.equals("")) {
+        List<Score> scores = queryData();
+        if (scores.size()==0){
             ScoreUtil.getAllScore(service, this);
-        } else {
-            List<MySection> score = gson.fromJson(cache, new TypeToken<List<MySection>>() {
-            }.getType());
-            if (score.size() != 0) {
-                list2.clear();
-                list2.addAll(score);
-                adapter.notifyDataSetChanged();
+        }else {
+            list2.clear();
+            for (int i=0;i<scores.size();i++){
+                Score score=scores.get(i);
+                if (score.getIsHead()){
+                    list2.add(new MySection(true,score.getTitle()));
+                }else {
+                    list2.add(new MySection(score));
+                }
             }
+            adapter.notifyDataSetChanged();
+            if (swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(this, "刷新成功！", Toast.LENGTH_SHORT).show();
+            }
+            Toast.makeText(AllScoreActivity.this,"直接从数据库中拿所有学期成绩",Toast.LENGTH_LONG).show();
         }
-
     }
 
     /**
@@ -113,22 +122,29 @@ public class AllScoreActivity extends BaseActivity implements SwipeRefreshLayout
         switch (code) {
             case Constant.AllScoreUrl:
                 list2.clear();
+                list8.clear();
                  list1 = ScoreData.getList2();
                  map=ScoreData.getMap();
+                User user = MyApp.getUser();
                 for (int i=0;i<list1.size();i++){
+                    //头部信息
                     MySection mySection=new MySection(true,list1.get(i).getTitle());
                     list2.add(mySection);
+                    list8.add(new Score(null,user.getAccount(),list1.get(i).getTitle(),null,null,"suo",true));
                     List<Score> list3 = map.get(i + "");
                     for (int j=0; j<list3.size();j++){
                         list2.add(new MySection(list3.get(j)));
+                        Score score = list3.get(j);
+                        list8.add(new Score(null,user.getAccount(),score.getTitle(),score.getXuefen(),score.getChengji(),"suo",false));
                     }
                 }
+                    insertData(list8);
+
                 adapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()){
                     swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(this, "刷新成功！", Toast.LENGTH_SHORT).show();
                 }
-                SpUtil.setParam(this,"allscore",list2);
                 break;
         }
     }
@@ -140,6 +156,31 @@ public class AllScoreActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        getCurrentScore();
+        ScoreUtil.getAllScore(service, this);
+    }
+    public void insertData(List<Score> score){
+        DaoManager instance = DaoManager.getInstance(this);
+        DaoSession session = instance.getSession();
+        ScoreDao scoreDao = session.getScoreDao();
+        QueryBuilder<Score> queryBuilder = scoreDao.queryBuilder();
+        queryBuilder.and(ScoreDao.Properties.Flag.eq("suo"), ScoreDao.Properties.Username.eq(MyApp.getUser().getAccount()));
+        List<Score> suo = queryBuilder.list();
+        if (suo.size()==0){
+            scoreDao.insertInTx(score);
+        }else {
+            scoreDao.deleteInTx(suo);
+            scoreDao.insertInTx(score);
+        }
+    }
+    public List<Score> queryData(){
+        User user = MyApp.getUser();
+        System.out.println("user。。。。。"+user.getAccount());
+        DaoManager instance = DaoManager.getInstance(this);
+        DaoSession session = instance.getSession();
+        ScoreDao scoreDao = session.getScoreDao();
+        QueryBuilder<Score> queryBuilder = scoreDao.queryBuilder();
+        queryBuilder.where(queryBuilder.and(ScoreDao.Properties.Username.eq(user.getAccount()),ScoreDao.Properties.Flag.eq("suo")));
+        List<Score> suo = queryBuilder.list();
+        return suo;
     }
 }

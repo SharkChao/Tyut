@@ -85,7 +85,7 @@ public class XueFen {
     private String pjcj;
     @Property(nameInDb = "pjcjbjpm")
     private String pjcjbjpm;
-    @Property(nameInDb = "bjh")
+    @Property(nameInDb = "pjcjzypm")
     private String pjcjzypm;
     @Property(nameInDb = "jqxfcj")
     private String jqxfcj;

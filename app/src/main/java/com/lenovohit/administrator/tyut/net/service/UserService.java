@@ -2,10 +2,13 @@ package com.lenovohit.administrator.tyut.net.service;
 
 import com.lenovohit.administrator.tyut.constant.Constant;
 
+import java.util.Map;
+
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -51,4 +54,8 @@ public interface UserService {
     @FormUrlEncoded
     @POST
     Observable<ResponseBody>getAllData(@Url String url,@Field("reportParamsId")String id,@Field("report1_currPage") String page,@Field("report1_cachedId")String cache);
+
+    @FormUrlEncoded
+    @POST
+    Observable<ResponseBody>getUserToken(@Url String url, @HeaderMap Map<String ,String>headMap,@Field("userId") String userId, @Field("name")String name, @Field("portraitUri")String picUri);
 }

@@ -1,8 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="@color/app_bj_colors"
+    android:scrollbars="none"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="@mipmap/i_backgroud_personal"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.lenovohit.administrator.tyut.views.CircleImageView
+                    android:id="@+id/ivPic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/icon_doctor" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="用户昵称"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="学号"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="我的关注"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="我的粉丝"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:layout_marginTop="10dp"
+            android:id="@+id/item1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:id="@+id/item2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:id="@+id/item3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:layout_marginTop="10dp"
+            android:id="@+id/item4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:id="@+id/item5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+
+        <com.lenovohit.administrator.tyut.views.MyItemOne
+            android:layout_marginTop="10dp"
+            android:id="@+id/item6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.lenovohit.administrator.tyut.views.MyItemOne>
+        <Button
+            android:id="@+id/btnUnLogin"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="退出当前账户"
+            android:textColor="#fff"
+            android:padding="10dp"
+            android:background="#f00"/>
+       </LinearLayout>
+</ScrollView>

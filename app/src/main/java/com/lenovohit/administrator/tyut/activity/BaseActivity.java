@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
+import com.lenovohit.administrator.tyut.app.AppManager;
 import com.lenovohit.administrator.tyut.receiver.NetStateReceiver;
 import com.lenovohit.administrator.tyut.receiver.Observer;
 
@@ -18,20 +19,18 @@ public abstract class BaseActivity extends FragmentActivity implements Observer{
 
     public static Activity currentActivity;
     private NetStateReceiver receiver;
+    private AppManager appManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setTheme(android.R.style.Theme_Light_NoTitleBar);
-        //判断当前SDK版本号，如果是4.4以上，就是支持沉浸式状态栏的
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//        }
         receiver = new NetStateReceiver();
         receiver.registerObserver(this);
         currentActivity=this;
+        appManager = AppManager.getAppManager();
+        appManager.addActivity(this);
         initView();
         initDate();
         initEvent();

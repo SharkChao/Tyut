@@ -6,11 +6,8 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.BaseActivity;
 import com.lenovohit.administrator.tyut.adapter.ScoreAdapter;
@@ -18,14 +15,18 @@ import com.lenovohit.administrator.tyut.app.MyApp;
 import com.lenovohit.administrator.tyut.constant.Constant;
 import com.lenovohit.administrator.tyut.data.ScoreData;
 import com.lenovohit.administrator.tyut.domain.MySection;
+import com.lenovohit.administrator.tyut.greendao.DaoManager;
+import com.lenovohit.administrator.tyut.greendao.DaoSession;
 import com.lenovohit.administrator.tyut.greendao.Score;
+import com.lenovohit.administrator.tyut.greendao.ScoreDao;
+import com.lenovohit.administrator.tyut.greendao.User;
 import com.lenovohit.administrator.tyut.net.service.UserService;
 import com.lenovohit.administrator.tyut.utils.EventUtil;
 import com.lenovohit.administrator.tyut.utils.ScoreUtil;
-import com.lenovohit.administrator.tyut.utils.SpUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +56,11 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
     List<Score> list1 = new ArrayList<>();
     //成绩
     Map<String, List<Score>> map = new HashMap<>();
+    //用来和数据库打交道
+    List<Score>list8=new ArrayList<>();
     private ScoreAdapter adapter;
+    private User user;
+    private ScoreDao scoreDao;
 
     @Override
     public void Update(Boolean isConnection) {
@@ -72,7 +77,10 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
 
     @Override
     public void initDate() {
-
+        user = MyApp.getUser();
+        DaoManager instance = DaoManager.getInstance(this);
+        DaoSession session = instance.getSession();
+        scoreDao = session.getScoreDao();
     }
 
     @Override
@@ -89,18 +97,20 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
      * 发送请求到学校接口，获取本学期成绩
      */
     public void getCurrentScore() {
-        Gson gson = new Gson();
-        String cache = (String) SpUtil.getParam(this, "lastscore", "");
-        if (TextUtils.isEmpty(cache)) {
+
+        List<Score> scores = queryData();
+        if (scores.size()==0){
             ScoreUtil.getAllScore(service, this);
-        } else {
-            List<MySection> score = gson.fromJson(cache, new TypeToken<List<MySection>>() {
-            }.getType());
-            if (score.size() != 0) {
-                list2.clear();
-                list2.addAll(score);
-                adapter.notifyDataSetChanged();
+        }else {
+            list2.clear();
+            for (Score score:scores){
+                if (score.getIsHead()){
+                    list2.add(new MySection(true,score.getTitle()));
+                }else {
+                    list2.add(new MySection(score));
+                }
             }
+            adapter.notifyDataSetChanged();
         }
 
     }
@@ -113,6 +123,7 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
         switch (code) {
             case Constant.AllScoreUrl:
                 list2.clear();
+                list8.clear();
                 list1 = ScoreData.getList2();
                 map = ScoreData.getMap();
                 int k = list1.size() - 1;
@@ -121,13 +132,15 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
                     if (k >= 0) {
                         MySection mySection = new MySection(true, list1.get(k).getTitle());
                         list2.add(mySection);
+                        list8.add(new Score(null,user.getAccount(),list1.get(k).getTitle(),null,null,"shang",true));
                         List<Score> list3 = map.get(k + "");
                         for (int j = 0; j < list3.size(); j++) {
                             list2.add(new MySection(list3.get(j)));
+                            list8.add(new Score(null,user.getAccount(),list3.get(j).getTitle(),list3.get(j).getXuefen(),list3.get(j).getChengji(),"shang",false));
                         }
+                        insertData(list8);
                     }
                 }
-                SpUtil.setParam(this, "lastscore", list2);
                 adapter.notifyDataSetChanged();
                 if (swipeRefreshLayout.isRefreshing()) {
                     swipeRefreshLayout.setRefreshing(false);
@@ -144,6 +157,28 @@ public class LastScoreActivity extends BaseActivity implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        getCurrentScore();
+        ScoreUtil.getAllScore(service, this);
+    }
+    /**
+     * 查询数据库中的上学期成绩
+     */
+    public List<Score> queryData(){
+
+        QueryBuilder<Score> qb = scoreDao.queryBuilder();
+        qb.where(qb.and(ScoreDao.Properties.Username.eq(user.getAccount()),ScoreDao.Properties.Flag.eq("shang")));
+        List<Score> list = qb.list();
+        return list;
+    }
+    /**
+     * 把上学期成绩插入到数据库中
+     */
+    public void insertData(List<Score>list){
+        List<Score> scores = queryData();
+        if (scores.size()==0){
+            scoreDao.insertInTx(list);
+        }else {
+            scoreDao.deleteInTx(scores);
+            scoreDao.insertInTx(list);
+        }
     }
 }
