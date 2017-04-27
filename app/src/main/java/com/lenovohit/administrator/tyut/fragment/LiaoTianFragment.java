@@ -27,6 +27,7 @@ public class LiaoTianFragment extends BaseFragment {
     private Context context;
     private TokenDao tokenDao;
     private SwitchButton switchButton;
+    private Fragment fragment;
 
     public LiaoTianFragment(Context context){
         this.context=context;
@@ -55,7 +56,7 @@ public class LiaoTianFragment extends BaseFragment {
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragment,fragment).commit();
                 }else if (position==1){
-                    Fragment fragment = new LianxirenFragment(getActivity());
+                    if (fragment==null) fragment = new LianxirenFragment(getActivity());
                     FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragment,fragment).commit();
                 }

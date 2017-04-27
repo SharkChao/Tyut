@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.RectF;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.model.GlideUrl;
+import com.jock.lib.HighLight;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.app.MyApp;
 import com.lenovohit.administrator.tyut.data.TokenData;
@@ -39,6 +42,8 @@ import com.lenovohit.administrator.tyut.views.Alert;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -61,6 +66,7 @@ import co.mobiwise.materialintro.shape.ShapeType;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 import okhttp3.Cookie;
 import okhttp3.ResponseBody;
 import rx.Observable;
@@ -101,6 +107,8 @@ public class LoginActivity extends BaseActivity {
     private TokenDao tokenDao;
     private String token;
     private Alert alert;
+    private UserInfo userInfo;
+
     @Override
     public void initView() {
         //解决键盘遮挡布局
@@ -117,6 +125,10 @@ public class LoginActivity extends BaseActivity {
             tvConn.setVisibility(View.GONE);
         }
          boolean checked = (boolean) SpUtil.getParam(this,"isChecked",false);
+        boolean isfirst = (boolean) SpUtil.getParam(this,"isFirstOne",true);
+        if (isfirst==true){
+            showMengBan();
+        }
         //是否保存账号密码
         if (checked){
             tvAccount.setText(getParam(LoginActivity.this,"name","1")+"");
@@ -133,13 +145,14 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+        SpUtil.setParam(this,"isFirstOne",false);
     }
 
    @Override
     public void initDate() {
        getYan();
        //展示验证码
-       reflashYan(ivYan);
+//       reflashYan(ivYan);
        DaoSession session = DaoManager.getInstance(this).getSession();
        userDao = session.getUserDao();
        tokenDao = session.getTokenDao();
@@ -155,6 +168,20 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    //展示蒙版
+    public void showMengBan() {
+                HighLight highLight = new HighLight(LoginActivity.this)
+                        .anchor(findViewById(R.id.screen))
+                        .addHighLight(R.id.ivYan, R.layout.info_down, new HighLight.OnPosCallback() {
+
+                            @Override
+                            public void getPos(float v, float v1, RectF rectF, HighLight.MarginInfo marginInfo) {
+                                marginInfo.leftMargin = v - rectF.width() / 2;
+                                marginInfo.bottomMargin = v1+200;
+                            }
+                        });
+                highLight.show();
+    }
     /**
      * 拿到验证码图片，得放到第一步之后,因为要获得cookie
      */
@@ -448,6 +475,12 @@ public class LoginActivity extends BaseActivity {
                     if (alert!=null){
                         alert.dismiss();
                     }
+                    RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+                        @Override
+                        public UserInfo getUserInfo(String s) {
+                            return findUserById(s);
+                        }
+                    },true);
                     HomeActivity.StartHomeActivity(LoginActivity.this);
                     finish();
                 }
@@ -482,5 +515,29 @@ public class LoginActivity extends BaseActivity {
                 LoginRongIM(tokens.getToken());
             }
         }
+    }
+    public UserInfo findUserById(final String userId){
+        BmobQuery query=new BmobQuery("_User");
+        query.addWhereEqualTo("username", userId);
+        query.findObjectsByTable(new QueryListener<JSONArray>() {
+            @Override
+            public void done(JSONArray jsonArray, BmobException e) {
+                if (e==null&&jsonArray.length()>0){
+                    try {
+                        JSONObject jsonObject = jsonArray.getJSONObject(0);
+                        String nickname = jsonObject.optString("nickname", "");
+                        String url=jsonObject.optString("picture","");
+                        Uri uri=Uri.parse(url);
+                        userInfo = new UserInfo(userId, nickname, uri);
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+        if (userInfo==null){
+            return null;
+        }
+        return userInfo;
     }
 }

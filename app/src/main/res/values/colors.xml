@@ -17,6 +17,7 @@
     <color name="q_blue">#557bbfea</color>
     <color name="s_blue">#67B0EC</color>
     <color name="dahai">#2E76FD</color>
+    <color name="light_gray">#fff5f5f5</color>
     <color name="divider">#28dbd4</color>
     <color name="transparent">#00000000</color>
     <color name="app_bj_colors">#f4f4f4</color>
@@ -108,4 +109,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="classIndex" >#CCCCCC</color>
+    <color name="courseTextColor" >#ECECEC</color>
+    <color name="actionBarBg">#6666CC</color>
+    <color name="actionBarText">#EDEDED</color>
 </resources>

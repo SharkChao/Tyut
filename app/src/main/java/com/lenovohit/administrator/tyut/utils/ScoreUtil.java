@@ -373,8 +373,8 @@ public class ScoreUtil {
 
     //先登录另一个有学分绩点的教务处，里边有成绩，学分绩点排名
     public static void getXueFenLogin(final UserService service, final Context context) {
-        final String username = (String) SpUtil.getParam(context, "username1", "1");
-        String password = (String) SpUtil.getParam(context, "password1", "1");
+        final String username = (String) SpUtil.getParam(context, "name", "1");
+        String password = (String) SpUtil.getParam(context, "password", "1");
         Observable<ResponseBody> observable = service
                 .LoginXueFen(Constant.XuefenLogin,
                         "/wEdAAUmMiHpVdXzbs7h/Fjlk54Os6cJ10LSoiuCyULvHjRPuC/yb/VVqFmvGO/9JabxfEt0OWarNtHZvueomBCnXS0aq0ylv1H88AeRYXQDfUknQ1NvvP5How9yic4FW/LO1rEEV0MN3CKL1nX2BAZHHIEd",

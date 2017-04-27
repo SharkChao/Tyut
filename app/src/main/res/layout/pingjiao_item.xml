@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+  >
+    <TextView
+        android:id="@+id/coursename"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="计算机网络"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/teachername"
+        android:layout_below="@id/coursename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="教师:楼天城"/>
+    <TextView
+        android:id="@+id/sex"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBottom="@id/teachername"
+        android:layout_toRightOf="@id/teachername"
+        android:text="男"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/xuefen"
+        android:layout_below="@id/teachername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3学分"/>
+    <Button
+        android:padding="10dp"
+        android:id="@+id/btnPing"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:clickable="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已评价"/>
+</RelativeLayout>

@@ -13,7 +13,11 @@ import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.HomeActivity;
 import com.lenovohit.administrator.tyut.activity.LoginActivity;
 import com.lenovohit.administrator.tyut.app.MyApp;
+import com.lenovohit.administrator.tyut.data.UserData;
+import com.lenovohit.administrator.tyut.domain.BmobUser;
+import com.lenovohit.administrator.tyut.fragment.four.FeedBackActivity;
 import com.lenovohit.administrator.tyut.fragment.three.StudentInfoActivity;
+import com.lenovohit.administrator.tyut.fragment.three.StudyZLActivity;
 import com.lenovohit.administrator.tyut.utils.SpUtil;
 import com.lenovohit.administrator.tyut.utils.StringUtil;
 import com.lenovohit.administrator.tyut.views.Alert;
@@ -25,11 +29,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
@@ -81,10 +85,10 @@ public class MeFragment extends BaseFragment {
     @Override
     public void initData() {
         myItemOne1.setItemInfo(R.mipmap.i_my_switch_patient,"个人信息","");
-        myItemOne2.setItemInfo(R.mipmap.i_my_appointment,"还没想好","");
-        myItemOne3.setItemInfo(R.mipmap.i_mobile_treatment_history,"还没想好","");
-        myItemOne4.setItemInfo(R.mipmap.i_my_address,"还没想好","");
-        myItemOne5.setItemInfo(R.mipmap.i_my_opinion,"还没想好","");
+        myItemOne2.setItemInfo(R.mipmap.i_my_appointment,"学习资料","");
+        myItemOne3.setItemInfo(R.mipmap.i_mobile_treatment_history,"信息设置","");
+        myItemOne4.setItemInfo(R.mipmap.i_my_address,"换肤","");
+        myItemOne5.setItemInfo(R.mipmap.i_my_opinion,"意见反馈","");
         myItemOne6.setItemInfo(R.mipmap.i_my_setting,"设置","");
         //从bmob获取用户头像
         //从bmob获取用户昵称，二者合并到一块
@@ -96,11 +100,31 @@ public class MeFragment extends BaseFragment {
 
     @Override
     public void initEvent() {
-        //传递参数，进入个人信息锦棉
+        //传递参数，进入个人信息界面
         myItemOne1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StudentInfoActivity.startStudentInfoActivity(getActivity());
+                List<com.lenovohit.administrator.tyut.domain.BmobUser> list = new ArrayList<BmobUser>();
+                list.clear();
+                list.addAll(UserData.getList());
+                if (list.size()>0) {
+                    com.lenovohit.administrator.tyut.domain.BmobUser user = list.get(0);
+                    StudentInfoActivity.startStudentInfoActivity(getActivity(),user.getPicture(),user.getNickname(),user.getHappy(),user.getUsername(),user.getSex(),user.getZhuanye(),user.getBanji(),"0");
+                }else {
+                    Toast.makeText(context, "暂无用户信息", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        myItemOne2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudyZLActivity.startStudyZLActivity(context);
+            }
+        });
+        myItemOne5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FeedBackActivity.startFeddBackActivity(context);
             }
         });
         //退出当前账户
@@ -162,8 +186,6 @@ public class MeFragment extends BaseFragment {
      * @return
      */
     public void  getNickNameAndPicFromBmob(){
-        BmobUser user=new BmobUser();
-        user.setUsername(MyApp.getUser().getAccount());
         BmobQuery query=new BmobQuery("_User");
         query.addWhereEqualTo("username",MyApp.getUser().getAccount());
         query.findObjectsByTable(new QueryListener<JSONArray>() {
@@ -175,11 +197,22 @@ public class MeFragment extends BaseFragment {
 
                         JSONObject jsonObject = jsonArray.getJSONObject(0);
                         //设置用户昵称
-                        String nickname = jsonObject.getString("nickname");
+                        String nickname = jsonObject.optString("nickname","");
                         tvName.setText(StringUtil.isStrEmpty(nickname)?"暂无昵称":nickname);
-
                         //设置用户头像
-                        String  url = (String) jsonObject.get("picture");
+                        String  url = (String) jsonObject.optString("picture","");
+                        com.lenovohit.administrator.tyut.domain.BmobUser user=new com.lenovohit.administrator.tyut.domain.BmobUser();
+                        user.setName(StringUtil.isStrEmpty(jsonObject.optString("name",""))?"":jsonObject.optString("name",""));
+                        user.setNickname(StringUtil.isStrEmpty(jsonObject.optString("nickname",""))?"":jsonObject.optString("nickname",""));
+                        user.setPicture(StringUtil.isStrEmpty(url)?"":url);
+                        user.setHappy(StringUtil.isStrEmpty(jsonObject.optString("happy",""))?"":jsonObject.optString("happy",""));
+                        user.setZhuanye(StringUtil.isStrEmpty(jsonObject.optString("zhuanye",""))?"":jsonObject.optString("zhuanye",""));
+                        user.setBanji(StringUtil.isStrEmpty(jsonObject.optString("banji",""))?"":jsonObject.optString("banji",""));
+                       user.setUsername(MyApp.getUser().getAccount());
+                        List<com.lenovohit.administrator.tyut.domain.BmobUser>list=new ArrayList<com.lenovohit.administrator.tyut.domain.BmobUser>();
+                        list.clear();
+                        list.add(user);
+                        UserData.setList(list);
                         if (StringUtil.isStrEmpty(url)){
                             Toast.makeText(getActivity(), "还没有头像，请先设置头像！", Toast.LENGTH_SHORT).show();
                         }else {

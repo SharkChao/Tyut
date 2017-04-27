@@ -1,5 +1,7 @@
 package com.lenovohit.administrator.tyut.domain;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -21,6 +23,19 @@ public class BmobUser extends BmobObject {
     public String zhuanye;
     //所在班级
     public String banji;
+    //学号
+    public String username;
+    //好友列表
+    public List<String>friend;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public BmobUser(){
         this.setTableName("_User");
     }
@@ -78,5 +93,27 @@ public class BmobUser extends BmobObject {
 
     public void setBanji(String banji) {
         this.banji = banji;
+    }
+
+    public List<String> getLists() {
+        return friend;
+    }
+
+    public void setLists(List<String> lists) {
+        this.friend = lists;
+    }
+
+    @Override
+    public String toString() {
+        return "BmobUser{" +
+                "nickname='" + nickname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", picture='" + picture + '\'' +
+                ", name='" + name + '\'' +
+                ", happy='" + happy + '\'' +
+                ", zhuanye='" + zhuanye + '\'' +
+                ", banji='" + banji + '\'' +
+                ", account='" + username + '\'' +
+                '}';
     }
 }

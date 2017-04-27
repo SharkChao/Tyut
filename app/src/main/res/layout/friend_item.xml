@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/persion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@mipmap/personback1"
+        android:visibility="visible"
+        >
+        <com.lenovohit.administrator.tyut.views.CircleImageView
+            android:id="@+id/ivPic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/icon_doctor"/>
+        <TextView
+            android:id="@+id/tvAccount"
+            android:layout_alignBottom="@id/ivPic"
+            android:layout_toRightOf="@id/ivPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#f00"
+            android:text="xuehao"/>
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_toRightOf="@id/ivPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:text="Nickname"/>
+    </RelativeLayout>
+</LinearLayout>

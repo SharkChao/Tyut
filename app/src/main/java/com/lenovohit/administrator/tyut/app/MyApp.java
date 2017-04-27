@@ -11,6 +11,7 @@ import com.lenovohit.administrator.tyut.net.module.AppModule;
 import com.lenovohit.administrator.tyut.net.module.DaggerActivityComponent;
 import com.lenovohit.administrator.tyut.net.module.DaggerAppComponent;
 import com.lenovohit.administrator.tyut.utils.GlideImageLoader;
+import com.orhanobut.logger.LogLevel;
 
 import cn.bmob.v3.Bmob;
 import cn.finalteam.galleryfinal.BuildConfig;
@@ -19,6 +20,7 @@ import cn.finalteam.galleryfinal.FunctionConfig;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
+import cn.finalteam.toolsfinal.Logger;
 import io.rong.imkit.RongIM;
 
 /**
@@ -44,6 +46,7 @@ public class MyApp extends Application {
 //                .addInflater(new SkinMaterialViewInflater())  // material design 控件换肤初始化[可选]
 //                .addInflater(new SkinCardViewInflater())      // CardView 控件换肤初始化[可选]
 //                .loadSkin();
+        initLogger();
         AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule()).build();
         activityComponent=  DaggerActivityComponent.builder().appComponent(appComponent).activityModule(new ActivityModule(Constant.LoginUrl,this)).build();
         //第一：默认初始化
@@ -71,6 +74,11 @@ public class MyApp extends Application {
                 .setFunctionConfig(functionConfig)
         .build();
         GalleryFinal.init(coreConfig);
+    }
+    private void initLogger(){
+        LogLevel logLevel;
+        logLevel = LogLevel.FULL;
+        Logger.init("tag",true);                 // default PRETTYLOGGER or use just init()
     }
     public ActivityComponent getActivityComponent(){
         return activityComponent;

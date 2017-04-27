@@ -4,6 +4,9 @@ package com.lenovohit.administrator.tyut.utils;
  * Created by Administrator on 2017/3/17.
  */
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 字符串工具类.
  * @author sunruyi
@@ -29,5 +32,12 @@ public class StringUtil {
     }
     public static boolean isStrEmpty(String var0) {
         return var0 != null && !"".equals(var0.trim())?(var0 = var0.replaceAll(" ", "").trim()) == null || "".equals(var0.trim()):true;
+    }
+    public static String getToday() {
+        Date var0 = new Date();
+        return (new SimpleDateFormat("yyyy-MM-dd")).format(var0);
+    }
+    public static boolean isNotEmpty(Object var0) {
+        return var0 != null;
     }
 }

@@ -40,7 +40,7 @@ public class NewsDetailActivity extends BaseActivity {
         String url = getIntent().getStringExtra("url");
         ButterKnife.bind(this);
         alert = new Alert(this);
-        webview.loadUrl(url);
+//        Toast.makeText(this,"url"+url,Toast.LENGTH_LONG).show();
         setWebSeting(webview);
         webview.setWebViewClient(new WebViewClient() {
 
@@ -64,7 +64,7 @@ public class NewsDetailActivity extends BaseActivity {
 
             }
         });
-
+        webview.loadUrl(url);
     }
 
     public static void startNewsDetailActivity(Context context, String url) {
@@ -94,7 +94,7 @@ public class NewsDetailActivity extends BaseActivity {
         WebSettings webSettings = webview.getSettings();
 
         webSettings.setJavaScriptEnabled(true);  //支持js
-
+        webSettings.setDomStorageEnabled(true);
 
         webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
 
@@ -126,5 +126,11 @@ public class NewsDetailActivity extends BaseActivity {
         }else {
             tvConn.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        webview.destroy();
     }
 }

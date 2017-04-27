@@ -82,6 +82,7 @@ public class ActivityModule {
         return service;
     }
 
+
     private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;
     @ActivityScope
     @Provides

@@ -30,37 +30,58 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/ben"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:textColor="@color/black"
-            android:text="本学期成绩" />
+            android:orientation="horizontal"
+            android:layout_marginTop="100dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/ben"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:textColor="@color/red"
+                android:background="#fff"
+                android:gravity="center"
+                android:text="本学期成绩" />
 
-        <TextView
-            android:id="@+id/suo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="30dp"
-            android:textColor="@color/black"
-            android:text="所有成绩" />
+            <TextView
+                android:id="@+id/suo"
+                android:layout_marginLeft="1dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:textColor="@color/s_pink_press"
+                android:text="所有成绩" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/shang"
-            android:padding="30dp"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上学期成绩" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/shang"
+        android:textColor="@color/actionsheet_blue"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:text="上学期成绩" />
 
-        <TextView
-            android:padding="30dp"
-            android:id="@+id/bu"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="不及格成绩" />
+    <TextView
+        android:id="@+id/bu"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:textColor="@color/green"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:text="不及格成绩" />
+</LinearLayout>
+
 
 
     </LinearLayout>

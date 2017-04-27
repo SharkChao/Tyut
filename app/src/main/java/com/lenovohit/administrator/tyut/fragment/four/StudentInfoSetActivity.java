@@ -131,6 +131,14 @@ public class StudentInfoSetActivity extends BaseActivity{
                                 public void done(BmobException e) {
                                     if (e==null){
                                         Toast.makeText(StudentInfoSetActivity.this,"数据更新完成！",Toast.LENGTH_LONG).show();
+                                        Intent intent=new Intent();
+                                        intent.putExtra("name",name);
+                                        intent.putExtra("nickname",nickname);
+                                        intent.putExtra("happy",happy);
+                                        intent.putExtra("zhuanye",zhuanye);
+                                        intent.putExtra("banji",banji);
+                                        intent.putExtra("sex",sex);
+                                        setResult(1,intent);
                                         finish();
                                     }else {
                                         Toast.makeText(StudentInfoSetActivity.this,"数据更新失败",Toast.LENGTH_LONG).show();
@@ -152,5 +160,11 @@ public class StudentInfoSetActivity extends BaseActivity{
 
     public static void startStudentInfoSetActivity(Context context){
         context.startActivity(new Intent(context,StudentInfoSetActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(2);
     }
 }

@@ -54,11 +54,11 @@
     </LinearLayout>
 
     </LinearLayout>
-    <TextView
+    <ListView
+        android:id="@+id/lvList"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="联系人列表，分组待开发。。"
-        android:textColor="#000"
-        android:gravity="center"/>
+        />
 
 </LinearLayout>

@@ -42,4 +42,11 @@ public class Constant {
     public static final String XuefenLogin="http://202.207.247.60/Login.aspx";
     //学分绩点查询页面
     public static final String XueFenQuery="http://202.207.247.42/Hander/Cj/CjAjax.ashx?rnd=0.5845979209598502";
+
+    //获取课表详情
+    public static final String KeBiaoQuery="xkAction.do?actionType=6";
+    //获取蹭课查询界面
+    public static final String CengKeQuery="kckbcxAction.do?oper=kckb_lb";
+    //获取蹭课查询结果
+    public static final String CengKeQueryResult="kckbcxAction.do?oper=kbtjcx";
 }

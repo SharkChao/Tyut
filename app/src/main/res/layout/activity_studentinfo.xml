@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/personback1">
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
@@ -32,51 +33,202 @@
             android:textSize="20sp" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/rigBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@null" />
+            android:scaleType="fitXY"
+            android:background="@mipmap/seting"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="fitXY"
             android:layout_marginTop="-100dp"
-            android:src="@drawable/studentinfo"
+            android:src="@mipmap/back3"
             />
+        <com.lenovohit.administrator.tyut.views.CircleImageView
+            android:id="@+id/ivPic"
+            android:layout_below="@id/ivBack"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="-40dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/icon_doctor">
+        </com.lenovohit.administrator.tyut.views.CircleImageView>
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/ivBack"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <com.lenovohit.administrator.tyut.views.PullScrollView
+            android:layout_below="@id/tv1"
             android:id="@+id/pullScrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
             app:headerHeight="300dp"
             app:headerVisibleHeight="100dp"
             android:fillViewport="true"
             >
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvNickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#000"
+                    android:text="昵称"/>
+                <TextView
+                    android:id="@+id/tvQian"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-                <com.lenovohit.administrator.tyut.views.CircleImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@mipmap/icon_doctor">
-                </com.lenovohit.administrator.tyut.views.CircleImageView>
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="#f00"
-                    android:gravity="center"
-                    android:text="个人信息界面"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray_2"></View>
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@mipmap/xuehao"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="学号:" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:drawableLeft="@mipmap/sex"
+                    android:textColor="#000"
+                    android:drawablePadding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="性别:"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:drawableLeft="@mipmap/zhuanye"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="专业名称:"/>
+                <TextView
+                    android:textColor="#000"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:drawableLeft="@mipmap/banji1"
+                    android:drawablePadding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="所在班级:"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_2"></View>
+                <TextView
+                    android:id="@+id/tvAccount"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="2013004848"/>
+                <TextView
+                    android:id="@+id/tvSex"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="帅哥"/>
+                <TextView
+                    android:id="@+id/tvZhuan"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="软件工程"/>
+                <TextView
+                    android:id="@+id/tvBan"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="软件1322"/>
+            </LinearLayout>
+            </LinearLayout>
             </LinearLayout>
         </com.lenovohit.administrator.tyut.views.PullScrollView>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/senMsg"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rc_cs_leave_message_btn"
+            android:text="发送消息"/>
+        <Button
+            android:id="@+id/addFriend"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="添加好友"
+            android:background="@drawable/rc_cs_leave_message_btn"/>
     </RelativeLayout>
 
 </LinearLayout>

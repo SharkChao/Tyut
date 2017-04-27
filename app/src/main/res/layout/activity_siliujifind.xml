@@ -37,12 +37,8 @@
             android:background="@null" />
 
     </RelativeLayout>
-    <EditText
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="请输入四六级准考证号"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="姓名的前两个字"/>
+        android:layout_height="match_parent"></WebView>
 </LinearLayout>

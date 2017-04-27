@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Tyut</string>
     <string name="a">&lt;i>大一&lt;/i></string>
+    <string name="title_activity_xuan_ke_guan_li">XuanKeGuanLiActivity</string>
 </resources>

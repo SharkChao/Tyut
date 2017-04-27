@@ -13,6 +13,7 @@ import com.lenovohit.administrator.tyut.adapter.MyBasePageAdapter;
 import com.lenovohit.administrator.tyut.views.Alert;
 
 import butterknife.Bind;
+import cn.bmob.v3.update.BmobUpdateAgent;
 
 /**
  * Created by Administrator on 2017/2/27.
@@ -38,7 +39,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initDate() {
-
+        //检测我的应用是否需要更新
+        BmobUpdateAgent.setUpdateOnlyWifi(true);
+        BmobUpdateAgent.update(this);
     }
 
     @Override

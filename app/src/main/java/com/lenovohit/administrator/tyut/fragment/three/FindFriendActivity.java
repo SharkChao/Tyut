@@ -12,12 +12,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.BaseActivity;
+import com.lenovohit.administrator.tyut.data.UserData;
 import com.lenovohit.administrator.tyut.utils.StringUtil;
 import com.lenovohit.administrator.tyut.views.CircleImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import cn.bmob.v3.BmobQuery;
@@ -55,6 +59,7 @@ public class FindFriendActivity extends BaseActivity {
         setContentView(R.layout.activity_findfriend);
         editText = (EditText) findViewById(R.id.search_et);
         listView= (ListView) findViewById(R.id.lvList);
+        persion.setVisibility(View.GONE);
     }
 
     @Override
@@ -68,7 +73,13 @@ public class FindFriendActivity extends BaseActivity {
         persion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StudentInfoActivity.startStudentInfoActivity(FindFriendActivity.this);
+                List<com.lenovohit.administrator.tyut.domain.BmobUser> findList = UserData.getFindList();
+                if (findList.size()>0){
+                    com.lenovohit.administrator.tyut.domain.BmobUser user = findList.get(0);
+                    StudentInfoActivity.startStudentInfoActivity(FindFriendActivity.this,user.getPicture(),user.getNickname(),user.getHappy(),user.getUsername(),user.getSex(),user.getZhuanye(),user.getBanji(),"1");
+                }else {
+                    Toast.makeText(FindFriendActivity.this,"暂无用户信息",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -91,15 +102,34 @@ public class FindFriendActivity extends BaseActivity {
                         if (e==null){
                             if (jsonArray.length()!=0){
                                 try {
-                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                    String nickname = jsonObject.getString("nickname");
-                                    String username = jsonObject.getString("username");
-                                    String url = jsonObject.getString("picture");
                                     persion.setVisibility(View.VISIBLE);
                                     tvshow.setVisibility(View.GONE);
-                                    tvNickname.setText(StringUtil.isStrEmpty(nickname)?"该用户暂无昵称":nickname);
-                                    tvAccount.setText(username);
-                                    if (!StringUtil.isStrEmpty(url)){
+
+                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                    //设置用户昵称
+                                    String nickname = jsonObject.optString("nickname","");
+                                    //设置用户账号
+                                    String account = jsonObject.optString("username","");
+                                    tvNickname.setText(StringUtil.isStrEmpty(nickname)?"暂无昵称":nickname);
+                                    tvAccount.setText(StringUtil.isStrEmpty(account)?"学号为空":account);
+                                    //设置用户头像
+                                    String  url = (String) jsonObject.optString("picture","");
+                                    com.lenovohit.administrator.tyut.domain.BmobUser user=new com.lenovohit.administrator.tyut.domain.BmobUser();
+                                    user.setName(StringUtil.isStrEmpty(jsonObject.optString("name",""))?"":jsonObject.optString("name",""));
+                                    user.setNickname(StringUtil.isStrEmpty(jsonObject.optString("nickname",""))?"":jsonObject.optString("nickname",""));
+                                    user.setPicture(StringUtil.isStrEmpty(url)?"":url);
+                                    user.setHappy(StringUtil.isStrEmpty(jsonObject.optString("happy",""))?"":jsonObject.optString("happy",""));
+                                    user.setZhuanye(StringUtil.isStrEmpty(jsonObject.optString("zhuanye",""))?"":jsonObject.optString("zhuanye",""));
+                                    user.setBanji(StringUtil.isStrEmpty(jsonObject.optString("banji",""))?"":jsonObject.optString("banji",""));
+                                    user.setUsername(StringUtil.isStrEmpty(account)?"":account);
+                                    List<com.lenovohit.administrator.tyut.domain.BmobUser> list=new ArrayList<com.lenovohit.administrator.tyut.domain.BmobUser>();
+                                    list.clear();
+                                    list.add(user);
+                                    UserData.setFindList(list);
+                                    if (StringUtil.isStrEmpty(url)){
+                                        Toast.makeText(FindFriendActivity.this, "还没有头像，请先设置头像！", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        Toast.makeText(FindFriendActivity.this,url,Toast.LENGTH_LONG).show();
                                         Glide.with(FindFriendActivity.this).load(url).asBitmap().into(ivPic);
                                     }
                                 } catch (JSONException e1) {

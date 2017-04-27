@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffff0"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#fff"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:text="上海"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="意见反馈"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingTop="30dp"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_marginLeft="10dp"
+            android:id="@+id/editfeed"
+            android:layout_width="300dp"
+            android:layout_height="fill_parent"
+            android:background="#ffe4b5"
+            android:gravity="top"
+            android:ems="10"
+            android:hint="请输入意见信息" >
+            <requestFocus />
+        </EditText>
+        <Button
+            android:id="@+id/btnFeed"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="17sp"
+            android:background="@drawable/button_select"
+            android:text="提交反馈"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backadvise"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/feedback" />
+</LinearLayout>
