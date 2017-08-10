@@ -3,6 +3,7 @@ package com.lenovohit.administrator.tyut.fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.lenovohit.administrator.tyut.app.MyApp;
 import com.lenovohit.administrator.tyut.data.UserData;
 import com.lenovohit.administrator.tyut.domain.BmobUser;
 import com.lenovohit.administrator.tyut.fragment.four.FeedBackActivity;
+import com.lenovohit.administrator.tyut.fragment.four.StudentInfoSetActivity;
 import com.lenovohit.administrator.tyut.fragment.three.StudentInfoActivity;
 import com.lenovohit.administrator.tyut.fragment.three.StudyZLActivity;
 import com.lenovohit.administrator.tyut.utils.SpUtil;
@@ -39,8 +41,11 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
+import cn.feng.skin.manager.listener.ILoaderListener;
+import cn.feng.skin.manager.loader.SkinManager;
 import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+
 
 
 /**
@@ -85,11 +90,10 @@ public class MeFragment extends BaseFragment {
     @Override
     public void initData() {
         myItemOne1.setItemInfo(R.mipmap.i_my_switch_patient,"个人信息","");
-        myItemOne2.setItemInfo(R.mipmap.i_my_appointment,"学习资料","");
-        myItemOne3.setItemInfo(R.mipmap.i_mobile_treatment_history,"信息设置","");
-        myItemOne4.setItemInfo(R.mipmap.i_my_address,"换肤","");
+        myItemOne2.setItemInfo(R.mipmap.i_my_appointment,"信息设置","");
+        myItemOne3.setItemInfo(R.mipmap.i_mobile_treatment_history,"学习资料","");
+        myItemOne4.setItemInfo(R.mipmap.i_my_address,"夜间模式","");
         myItemOne5.setItemInfo(R.mipmap.i_my_opinion,"意见反馈","");
-        myItemOne6.setItemInfo(R.mipmap.i_my_setting,"设置","");
         //从bmob获取用户头像
         //从bmob获取用户昵称，二者合并到一块
 
@@ -118,7 +122,46 @@ public class MeFragment extends BaseFragment {
         myItemOne2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StudentInfoSetActivity.startStudentInfoSetActivity(context);
+            }
+        });
+        myItemOne3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 StudyZLActivity.startStudyZLActivity(context);
+            }
+        });
+        myItemOne4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean b = (boolean) SpUtil.getParam(context, "isNight", false);
+                if (b==false) {
+                    String SKIN_NAME = "BlackFantacy.skin";
+                    String SKIN_DIR = Environment.getExternalStorageDirectory() + File.separator + SKIN_NAME;
+                    File skin = new File(SKIN_DIR);
+                    SkinManager.getInstance().load(skin.getAbsolutePath(),
+                            new ILoaderListener() {
+                                @Override
+                                public void onStart() {
+                                }
+
+                                @Override
+                                public void onSuccess() {
+                                    Toast.makeText(context, "切换成功", Toast.LENGTH_SHORT).show();
+                                    myItemOne4.setItemInfo(R.mipmap.i_my_address,"正常模式","");
+                                    SpUtil.setParam(context, "isNight", true);
+                                }
+
+                                @Override
+                                public void onFailed() {
+                                    Toast.makeText(context, "切换失败", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }else {
+                    SkinManager.getInstance().restoreDefaultTheme();
+                    SpUtil.setParam(context,"isNight",false);
+                    myItemOne4.setItemInfo(R.mipmap.i_my_address,"夜间模式","");
+                }
             }
         });
         myItemOne5.setOnClickListener(new View.OnClickListener() {

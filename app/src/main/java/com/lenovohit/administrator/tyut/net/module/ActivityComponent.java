@@ -9,6 +9,7 @@ import com.lenovohit.administrator.tyut.fragment.one.SchoolPlayFragment;
 import com.lenovohit.administrator.tyut.fragment.two.AllScoreActivity;
 import com.lenovohit.administrator.tyut.fragment.two.BuScoreActivity;
 import com.lenovohit.administrator.tyut.fragment.two.CengKeActivity;
+import com.lenovohit.administrator.tyut.fragment.two.CengKeDetailActivity;
 import com.lenovohit.administrator.tyut.fragment.two.CurrentScoreActivity;
 import com.lenovohit.administrator.tyut.fragment.two.KeBiaoActivity;
 import com.lenovohit.administrator.tyut.fragment.two.LastScoreActivity;
@@ -37,5 +38,5 @@ public interface ActivityComponent {
     void inject(XueFenActivity activity);
     void inject(KeBiaoActivity activity);
     void inject(CengKeActivity activity);
-
+    void inject(CengKeDetailActivity activity);
 }

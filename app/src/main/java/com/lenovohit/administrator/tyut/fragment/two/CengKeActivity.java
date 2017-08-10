@@ -2,6 +2,8 @@ package com.lenovohit.administrator.tyut.fragment.two;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.activity.BaseActivity;
@@ -26,11 +29,12 @@ import com.lenovohit.administrator.tyut.utils.EventUtil;
 import com.lenovohit.administrator.tyut.utils.StringUtil;
 import com.lenovohit.administrator.tyut.views.LoadingDialog;
 import com.lenovohit.administrator.tyut.views.NiceSpinner;
-import com.orhanobut.logger.Logger;
+import com.lenovohit.administrator.tyut.views.RefreshLayout;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,7 @@ import butterknife.Bind;
  * 蹭课查询页面，可以查询我们想听的课程
  */
 
-public class CengKeActivity extends BaseActivity{
+public class CengKeActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, RefreshLayout.OnLoadListener {
     @Inject
     UserService service;
     @Bind(R.id.spinner)
@@ -55,6 +59,8 @@ public class CengKeActivity extends BaseActivity{
     Button btnFind;
     @Bind(R.id.lvList)
     ListView lvList;
+    @Bind(R.id.swipeLayout)
+    RefreshLayout swipeLayout;
     List<CourseCeng>kexiList=new ArrayList<>();
     List<String>listString=new ArrayList<>();
     List<Courses>courseList=new ArrayList<>();
@@ -71,6 +77,11 @@ public class CengKeActivity extends BaseActivity{
     @Override
     public void initView() {
         setContentView(R.layout.activity_cengke);
+        swipeLayout= (RefreshLayout) findViewById(R.id.swipeLayout);
+        // 加载颜色是循环播放的，只要没有完成刷新就会一直循环，color1>color2>color3>color4
+        swipeLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setOnLoadListener(this);
     }
 
     @Override
@@ -81,22 +92,16 @@ public class CengKeActivity extends BaseActivity{
     }
     @Override
     public void initEvent() {
+        loadingDialog = new LoadingDialog(CengKeActivity.this);
         btnFind.setOnClickListener(new View.OnClickListener() {
-
-
-
             @Override
              public  void onClick(View v) {
-                loadingDialog = new LoadingDialog(CengKeActivity.this);
                 loadingDialog.setMessage("正在加载中...");
                 loadingDialog.show();
                 String s = editText.getText().toString().trim();
                 try {
-                    String strGBK = URLEncoder.encode(s, "gb2312");
-                    Logger.d(strGBK);
-//                        CengKeUtil.getCengKeQueryResult(service,CengKeActivity.this, StringUtil.isStrEmpty(CengKeData.getCengKeQuery().getXueqi())?"":CengKeData.getCengKeQuery().getXueqi(),StringUtil.isStrEmpty(couserCode)?"":couserCode,"1",strGBK);
-                        CengKeUtil.getCengKeQueryResult3(CengKeActivity.this, StringUtil.isStrEmpty(CengKeData.getCengKeQuery().getXueqi())?"":CengKeData.getCengKeQuery().getXueqi(),StringUtil.isStrEmpty(couserCode)?"":couserCode,"1",strGBK);
-//                        CengKeUtil.getCengKeQueryResult1(CengKeActivity.this, StringUtil.isStrEmpty(CengKeData.getCengKeQuery().getXueqi())?"":CengKeData.getCengKeQuery().getXueqi(),StringUtil.isStrEmpty(couserCode)?"":couserCode,"1",s);
+                    String strGBK = URLEncoder.encode(s, "gbk");
+                        CengKeUtil.getCengKeQueryResult(service,CengKeActivity.this, StringUtil.isStrEmpty(CengKeData.getCengKeQuery().getXueqi())?"":CengKeData.getCengKeQuery().getXueqi(),StringUtil.isStrEmpty(couserCode)?"":couserCode,"1",strGBK);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -115,15 +120,24 @@ public class CengKeActivity extends BaseActivity{
 
                 }
             });
+
+        View mListViewFooter=View.inflate(this,R.layout.listview_footer,null);
         adapter = new MyAdapter();
+        if(lvList.getFooterViewsCount()==0){
+            lvList.addFooterView(mListViewFooter);
+        }
         lvList.setAdapter(adapter);
+        lvList.removeFooterView(mListViewFooter);
         lvList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Courses courses = courseList.get(position);
+                CengKeDetailActivity.startCengkeDetailActivity(CengKeActivity.this, courses);
             }
         });
     }
+
+
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void receiveData(String code){
         if (code.equals(Constant.CengKeQuery)){
@@ -144,6 +158,10 @@ public class CengKeActivity extends BaseActivity{
             }
         }
         else if (code.equals(Constant.CengKeQueryResult)){
+            if (swipeLayout.isRefreshing()){
+                swipeLayout.setRefreshing(false);
+                swipeLayout.setLoading(false);
+            }
             List<Courses> list = CengKeData.getList();
             if (list!=null&&list.size()!=0){
                 courseList.clear();
@@ -151,6 +169,7 @@ public class CengKeActivity extends BaseActivity{
                 adapter.notifyDataSetChanged();
             }else if(list!=null&&list.size()==0){
                 courseList.clear();
+                Toast.makeText(this, "查不到数据,请换个关键字!", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
             if (loadingDialog!=null)
@@ -158,7 +177,58 @@ public class CengKeActivity extends BaseActivity{
                 loadingDialog.dismiss();
             }
         }
+        else if (code.equals(Constant.CengKeQueryResult+"1")){
+            if (swipeLayout.isRefreshing()){
+                swipeLayout.setRefreshing(false);
+                swipeLayout.setLoading(false);
+            }
+            List<Courses> list = CengKeData.getList();
+            if (list!=null&&list.size()!=0){
+                courseList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }else if(list!=null&&list.size()==0){
+                courseList.clear();
+                Toast.makeText(this, "查不到数据,请换个关键字!", Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
+            }
+            if (loadingDialog!=null)
+                if (loadingDialog.isShowing()){
+                    loadingDialog.dismiss();
+                }
+        }
     }
+
+    /**
+     * 下拉刷新
+     */
+    @Override
+    public void onRefresh() {
+        String s = editText.getText().toString().trim();
+        String strGBK = null;
+        try {
+            strGBK = URLEncoder.encode(s, "gbk");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        CengKeUtil.getCengKeQueryResult(service,CengKeActivity.this, StringUtil.isStrEmpty(CengKeData.getCengKeQuery().getXueqi())?"":CengKeData.getCengKeQuery().getXueqi(),StringUtil.isStrEmpty(couserCode)?"":couserCode,"1",strGBK);
+//        CengKeUtil.getCengKeQuery(service,this);
+    }
+
+    /**
+     * 上拉加载
+     */
+    @Override
+    public void onLoad() {
+        if (courseList.size()%50==0){
+            CengKeUtil.getCengKeQueryResultTwo(service,CengKeActivity.this,StringUtil.isStrEmpty(CengKeData.getNum())?"":CengKeData.getNum(),courseList.size()/50+1+"");
+        }else{
+            if (swipeLayout.isRefreshing()){
+                swipeLayout.setLoading(false);
+            }
+        }
+
+    }
+
     class ViewHolder {
         public TextView tvId;
         public TextView tvCourseName;
@@ -199,7 +269,7 @@ public class CengKeActivity extends BaseActivity{
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             Courses courses = courseList.get(position);
-            viewHolder.tvId.setText(courses.getId());
+                viewHolder.tvId.setText(courses.getId());
             viewHolder.tvCourseName.setText(courses.getCourseName()+"("+courses.getCourseCode()+")");
             viewHolder.tvTeacherName.setText("任课教师:  "+courses.getTeacherName());
             viewHolder.tvXuefen.setText("学分:  "+courses.getXueFen());

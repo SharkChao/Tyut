@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="#fff">
+        skin:enable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/skin_item_text_bg">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:id="@+id/tvFindFriend"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/tvFindFriend">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/newfriend"/>
+                android:src="@mipmap/newfriend" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="新朋友"/>
-            </LinearLayout>
+                android:text="新朋友" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/tvGroup">
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -37,12 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="群聊"/>
-        </LinearLayout><LinearLayout
+        </LinearLayout>
+        <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+            android:id="@+id/tvGongZhong">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -58,7 +68,7 @@
         android:id="@+id/lvList"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="503dp"
         />
 
 </LinearLayout>

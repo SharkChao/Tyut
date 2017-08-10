@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:textColor="#fff"
+        android:textColor="@color/skin_item_text_bg"
         android:padding="5dp" />
 </LinearLayout>

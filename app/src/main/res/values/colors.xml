@@ -113,4 +113,12 @@
     <color name="courseTextColor" >#ECECEC</color>
     <color name="actionBarBg">#6666CC</color>
     <color name="actionBarText">#EDEDED</color>
+
+
+    <color name="skin_item_text_color">#000</color>
+    <color name="skin_item_text_bg">#fff</color>
+
+
+
+
 </resources>

@@ -37,7 +37,7 @@ import com.lenovohit.administrator.tyut.utils.MD5Util;
 import com.lenovohit.administrator.tyut.utils.NetworkUtil;
 import com.lenovohit.administrator.tyut.utils.SpUtil;
 import com.lenovohit.administrator.tyut.utils.TokenUtil;
-import com.lenovohit.administrator.tyut.views.Alert;
+import com.lenovohit.administrator.tyut.views.LoadingDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -106,8 +106,9 @@ public class LoginActivity extends BaseActivity {
     private User user1;
     private TokenDao tokenDao;
     private String token;
-    private Alert alert;
+//    private Alert alert;
     private UserInfo userInfo;
+    private LoadingDialog dialog;
 
     @Override
     public void initView() {
@@ -231,14 +232,16 @@ public class LoginActivity extends BaseActivity {
         final String account=tvAccount.getText().toString();
         final String password=tvPassword.getText().toString();
         String yan=tvYan.getText().toString();
-        alert = new Alert(LoginActivity.this);
+//        alert = new Alert(LoginActivity.this);
+        dialog = new LoadingDialog(LoginActivity.this);
         service.Login(account,password,yan)
              .subscribeOn(Schedulers.newThread())
              .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-                        alert.builder().setCancelable(false).setMsg("正在登陆中，请稍等").setTitle("登录").show();
+//                        alert.builder().setCancelable(false).setMsg("正在登陆中，请稍等").setTitle("登录").show();
+                        dialog.setMessage("正在登陆中，请稍等..").show();
                     }
                 })
              .subscribe(new Subscriber<ResponseBody>() {
@@ -250,7 +253,10 @@ public class LoginActivity extends BaseActivity {
                      //如果登录教务处失败，弹出失败原因
                      Log.d("tag1",e.toString());
                      Toast.makeText(LoginActivity.this, "请连接您的网络！"+e, Toast.LENGTH_SHORT).show();
-                     alert.dismiss();
+//                     alert.dismiss();
+                     if (dialog.isShowing()){
+                         dialog.dismiss();
+                     }
                  }
                  @Override
                  public void onNext(ResponseBody responseBody) {
@@ -286,13 +292,13 @@ public class LoginActivity extends BaseActivity {
                                  @Override
                                  public void done(JSONArray jsonArray, BmobException e) {
                                      if (e==null&&jsonArray.length()>0){
-                                         Toast.makeText(LoginActivity.this, "Bmob后端云由当前用户，可以直接登录", Toast.LENGTH_SHORT).show();
+//                                         Toast.makeText(LoginActivity.this, "Bmob后端云由当前用户，可以直接登录", Toast.LENGTH_SHORT).show();
                                          bmobUser.login(new SaveListener<BmobUser>() {
 
                                              @Override
                                              public void done(BmobUser bmobUser, BmobException e) {
                                                  if (e==null){
-                                                     Toast.makeText(LoginActivity.this,"Bmob后端云登陆成功！",Toast.LENGTH_LONG).show();
+//                                                     Toast.makeText(LoginActivity.this,"Bmob后端云登陆成功！",Toast.LENGTH_LONG).show();
                                                      //判断有没有token，有的话连接上才可以跳转
                                                      List<Token> tokens1 = queryToken(user);
                                                      if (tokens1.size()==0){
@@ -307,12 +313,12 @@ public class LoginActivity extends BaseActivity {
                                              }
                                          });
                                      }else if (e==null&&jsonArray.length()<=0){
-                                         Toast.makeText(LoginActivity.this, "Bmob后端云还没有当前用户，先登录", Toast.LENGTH_SHORT).show();
+//                                         Toast.makeText(LoginActivity.this, "Bmob后端云还没有当前用户，先登录", Toast.LENGTH_SHORT).show();
                                          bmobUser.signUp(new SaveListener<BmobUser>() {
                                              @Override
                                              public void done(BmobUser bmobUser, BmobException e) {
                                                  if (e==null){
-                                                     Toast.makeText(LoginActivity.this,"第一次进入bmob后端云注册成功！",Toast.LENGTH_LONG).show();
+//                                                     Toast.makeText(LoginActivity.this,"第一次进入bmob后端云注册成功！",Toast.LENGTH_LONG).show();
                                                      //判断有没有token，有的话连接上才可以跳转
                                                      List<Token> tokens1 = queryToken(user);
                                                      if (tokens1.size()==0){
@@ -329,12 +335,15 @@ public class LoginActivity extends BaseActivity {
                                          });
                                      }
                                      else if (e!=null){
-                                         Toast.makeText(LoginActivity.this, "登录bmob后端云失败，请重新登陆", Toast.LENGTH_SHORT).show();
+                                         Toast.makeText(LoginActivity.this, "登录bmob后端云失败，请重新登陆"+e.getMessage(), Toast.LENGTH_SHORT).show();
                                      }
                                  }
                              });
                        }else {
-                             alert.dismiss();
+//                             alert.dismiss();
+                             if (dialog.isShowing()){
+                                 dialog.dismiss();
+                             }
                              Toast.makeText(LoginActivity.this, "如账号密码无误，请再次刷新验证码", Toast.LENGTH_SHORT).show();
                          }
                      }
@@ -426,10 +435,10 @@ public class LoginActivity extends BaseActivity {
 
         if (list.size()==0){
             userDao.insert(user);
-            Toast.makeText(this, "插入数据库成功！", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "插入数据库成功！", Toast.LENGTH_LONG).show();
         }else {
             //说明数据库中有当前用户的实例
-            Toast.makeText(this, "数据库中已有数据", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "数据库中已有数据", Toast.LENGTH_LONG).show();
             User user2 = queryUser(user);
             userDao.update(user2);
         }
@@ -438,9 +447,9 @@ public class LoginActivity extends BaseActivity {
         List<User> list = userDao.queryBuilder()
                 .where(UserDao.Properties.Account.eq(user.getAccount())).build().list();
         if (list.size()==0){
-            Toast.makeText(this,"数据库中没有当前用户",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"数据库中没有当前用户",Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "数据库中有当前用户，直接拿来用", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "数据库中有当前用户，直接拿来用", Toast.LENGTH_SHORT).show();
             user1 = list.get(0);
         }
         return user1;
@@ -471,9 +480,12 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(String s) {
-                    Toast.makeText(LoginActivity.this, "当前用户登陆成功,已经成功连接到融云服务器", Toast.LENGTH_SHORT).show();
-                    if (alert!=null){
-                        alert.dismiss();
+//                    Toast.makeText(LoginActivity.this, "当前用户登陆成功,已经成功连接到融云服务器", Toast.LENGTH_SHORT).show();
+//                    if (alert!=null){
+//                        alert.dismiss();
+//                    }
+                    if (dialog.isShowing()){
+                        dialog.dismiss();
                     }
                     RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
                         @Override
@@ -487,9 +499,9 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onError(RongIMClient.ErrorCode errorCode) {
-                    if (alert!=null){
+                    if (dialog!=null){
                         Toast.makeText(LoginActivity.this, "当前用户登录失败,请重新登陆！", Toast.LENGTH_SHORT).show();
-                        alert.dismiss();
+                        dialog.dismiss();
                     }
                 }
             });

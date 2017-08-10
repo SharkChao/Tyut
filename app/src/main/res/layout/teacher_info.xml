@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/list_item_selector"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
     <com.lenovohit.administrator.tyut.views.CircleImageView
         android:id="@+id/imgDoctor"
         android:layout_width="60dp"
@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="@dimen/app_interval_10"
         android:layout_marginTop="@dimen/app_interval_10"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:src="@mipmap/head"
         />
     <LinearLayout
@@ -75,9 +75,10 @@
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="立即预约"
+                android:text="立即参加"
                 android:textSize="@dimen/font_size_B"
-                android:textColor="@color/white"
+                skin:enable="true"
+                android:textColor="@color/skin_item_text_bg"
                 android:background="@drawable/button_select"
                 android:paddingTop="@dimen/app_interval_5"
                 android:paddingBottom="@dimen/app_interval_5"

@@ -20,6 +20,16 @@ public class Courses {
     private String courseName;
     //id
     private String id;
+    //点击详情
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getId() {
         return id;
@@ -87,6 +97,7 @@ public class Courses {
                 ", teacherName='" + teacherName + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", id='" + id + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

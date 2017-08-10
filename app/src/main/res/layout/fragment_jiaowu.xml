@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
 
@@ -26,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#8000"
+            android:background="@color/skin_item_text_color"
+            skin:enable="true"
             android:padding="2dp">
 
             <TextView
@@ -35,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="太原理工大学"
-                android:textColor="#fff"
+                android:textColor="@color/skin_item_text_bg"
+                skin:enable="true"
                 android:textSize="13sp" />
 
             <TextView
@@ -45,7 +48,8 @@
                 android:layout_below="@id/tvHosName"
                 android:layout_marginLeft="5dp"
                 android:text="211工程"
-                android:textColor="#fff"
+                android:textColor="@color/skin_item_text_bg"
+                skin:enable="true"
                 android:textSize="10sp" />
 
             <LinearLayout
@@ -60,14 +64,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="27000"
-                    android:textColor="#fff"
+                    android:textColor="@color/skin_item_text_bg"
+                    skin:enable="true"
                     android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="学生"
-                    android:textColor="#fff"
+                    android:textColor="@color/skin_item_text_bg"
+                    skin:enable="true"
                     android:textSize="10sp" />
             </LinearLayout>
         </RelativeLayout>
@@ -79,7 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_pic"
         android:layout_marginTop="3dp"
-        android:background="#fff"
+        skin:enable="true"
+        android:background="@color/skin_item_text_bg"
         android:padding="5dp">
 
         <TextView
@@ -89,7 +96,8 @@
             android:drawableLeft="@mipmap/local"
             android:drawablePadding="5dp"
             android:text="山西省太原市迎泽西大街79号"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
+            skin:enable="true"
             android:textSize="@dimen/font_size_B1" />
 
         <ImageView
@@ -109,15 +117,18 @@
             android:layout_toLeftOf="@id/ivPhone"
             android:background="@android:color/darker_gray" />
     </RelativeLayout>
-    <com.lenovohit.administrator.tyut.views.MyGridView android:id="@+id/gvGuide"
+    <com.lenovohit.administrator.tyut.views.MyGridView
+        android:id="@+id/gvGuide"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_below="@id/rl_local" android:layout_marginTop="10dp"
         android:horizontalSpacing="2dp" android:numColumns="2"
-        android:background="#fff"
+        android:background="@color/skin_item_text_bg"
+        skin:enable="true"
         android:scrollbars="none"
+        android:stackFromBottom="false"
         android:padding="10dp"
         android:verticalSpacing="2dp">
     </com.lenovohit.administrator.tyut.views.MyGridView>
 
 </LinearLayout>
-    </ScrollView>
+</ScrollView>

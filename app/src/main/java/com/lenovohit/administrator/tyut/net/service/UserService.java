@@ -9,7 +9,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -40,23 +39,27 @@ public interface UserService {
     Observable<ResponseBody>getAllScore();
     //不及格成绩
     @GET(Constant.BuScoreUrl)
-    Observable<ResponseBody>getBuScore();
+        Observable<ResponseBody>getBuScore();
     //上学期成绩
     @GET(Constant.ShangUrl)
     Observable<ResponseBody>getShangScore();
     //获取课表
     @GET(Constant.KeBiaoQuery)
     Observable<ResponseBody>getKeBiao();
+
+
     //获取蹭课查询界面
     @GET(Constant.CengKeQuery)
     Observable<ResponseBody>getCengKeQuery();
     //获取蹭课结果
-    @Headers({
-            "Content-Type: application/x-www-form-urlencoded; charset=gb2312;"
-            })
     @FormUrlEncoded
     @POST(Constant.CengKeQueryResult)
     Observable<ResponseBody>getCengKeQueryResult(@Field("kcxnxq")String xueqi,@Field("xsh")String yuanxi,@Field("pageSize")String size,@Field("page")String page,@Field("currentPage")String currentPage,@Field("kckcm")String courseName,@Field("kckch") String b,@Field("kckxh")String c,@Field("pageNo")String d);
+   @GET()
+   Observable<ResponseBody>getCengkeTime(@Url String url);
+    @GET()
+    Observable<ResponseBody>getCengKeReslutTwo(@Url String url);
+
     //获取学分绩点得先登录
     @FormUrlEncoded
     @POST

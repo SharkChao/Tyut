@@ -7,8 +7,8 @@ import com.lenovohit.administrator.tyut.activity.LoginActivity;
 import com.lenovohit.administrator.tyut.app.AppManager;
 import com.lenovohit.administrator.tyut.constant.Constant;
 import com.lenovohit.administrator.tyut.data.ScoreData;
-import com.lenovohit.administrator.tyut.greendao.Score;
 import com.lenovohit.administrator.tyut.fragment.two.CurrentScoreActivity;
+import com.lenovohit.administrator.tyut.greendao.Score;
 import com.lenovohit.administrator.tyut.net.service.UserService;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -54,9 +54,9 @@ public class ScoreUtil {
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
-                        AppManager appManager = AppManager.getAppManager();
-                        appManager.finishAllActivity();
-                        LoginActivity.startLoginActivity(context);
+//                        AppManager appManager = AppManager.getAppManager();
+//                        appManager.finishAllActivity();
+//                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -75,9 +75,11 @@ public class ScoreUtil {
         Document document = Jsoup.parse(html);
         String title = document.title();
         if (title.equals("错误信息")) {
-            LoginActivity.startLoginActivity(context);
-            ((CurrentScoreActivity) context).finish();
+//            LoginActivity.startLoginActivity(context);
+//            ((CurrentScoreActivity) context).finish();
+            Toast.makeText(context, "身份信息过期", Toast.LENGTH_SHORT).show();
         } else {
+            Toast.makeText(context, "解析出错", Toast.LENGTH_SHORT).show();
             Elements elements = document.getElementsByClass("odd");
             List<Score> list = new ArrayList<Score>();
             for (int i = 0; i < elements.size(); i++) {
@@ -206,9 +208,6 @@ public class ScoreUtil {
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(context, "身份信息过期，请重新登录" + e, Toast.LENGTH_SHORT).show();
-                        AppManager appManager = AppManager.getAppManager();
-                        appManager.finishAllActivity();
-                        LoginActivity.startLoginActivity(context);
                     }
 
                     @Override
@@ -227,8 +226,7 @@ public class ScoreUtil {
         Document document = Jsoup.parse(html);
         String title = document.title();
         if (title.equals("错误信息")) {
-            LoginActivity.startLoginActivity(context);
-            ((CurrentScoreActivity) context).finish();
+
         } else {
             Elements tables = document.getElementsByAttributeValue("id", "user");
             List<Score> list1 = new ArrayList<>();
@@ -377,9 +375,9 @@ public class ScoreUtil {
         String password = (String) SpUtil.getParam(context, "password", "1");
         Observable<ResponseBody> observable = service
                 .LoginXueFen(Constant.XuefenLogin,
-                        "/wEdAAUmMiHpVdXzbs7h/Fjlk54Os6cJ10LSoiuCyULvHjRPuC/yb/VVqFmvGO/9JabxfEt0OWarNtHZvueomBCnXS0aq0ylv1H88AeRYXQDfUknQ1NvvP5How9yic4FW/LO1rEEV0MN3CKL1nX2BAZHHIEd",
-                        "/wEPDwUKMTkzODMzMzAxN2QYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFDWNoa1JlbWVtYmVybWUmxiwhWD+RiQDMJawhlwFVLE2M4EJGvC7QSnf5ysk3RQ==",
-                        "C2EE9ABB", "登录", "on", password, username);
+                        "%2FwEdAAUSFvWVkO92Yrx21CLO2YYXs6cJ10LSoiuCyULvHjRPuC%2Fyb%2FVVqFmvGO%2F9JabxfEt0OWarNtHZvueomBCnXS0aq0ylv1H88AeRYXQDfUknQx%2F6lPRCau%2BAmT4JqsaniKHFMYUnFplQb%2B%2Fkd6iPlCDX",
+                        "%2FwEPDwUKMTkzODMzMzAxN2QYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFDWNoa1JlbWVtYmVybWXZ%2FLME4Kelkkfjyhux8owFC1MZ%2FlT2AnFu1m2TnUKZZA%3D%3D",
+                        "C2EE9ABB", "%e7%99%bb%e5%bd%95", "on", password, username);
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResponseBody>() {
@@ -390,8 +388,7 @@ public class ScoreUtil {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context,   "身份信息过期，请重新登录", Toast.LENGTH_SHORT).show();
-                        LoginActivity.startLoginActivity(context);
+                        Toast.makeText(context,   "身份信息过期，请重新登录"+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

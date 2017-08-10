@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#fff"
+        android:background="@color/skin_item_text_bg"
         android:padding="5dp">
 
         <TextView
@@ -16,7 +16,7 @@
             android:drawablePadding="2dp"
             android:gravity="center"
             android:text="上海"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="15sp"
             android:visibility="invisible" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="上学期成绩"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="20sp" />
 
         <ImageButton

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-     >
+    xmlns:skin="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/imageView1"
@@ -11,7 +11,8 @@
         android:layout_margin="5dp"
         android:layout_alignParentLeft="true"
         android:background="@color/orange"
-        android:textColor="#fff"
+        skin:enable="true"
+        android:textColor="@color/skin_item_text_bg"
         android:gravity="center"
         />
 
@@ -23,7 +24,8 @@
         android:layout_toRightOf="@id/imageView1"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:textColor="#000"
+        skin:enable="true"
+        android:textColor="@color/skin_item_text_color"
         android:text="111" />
 
     <TextView

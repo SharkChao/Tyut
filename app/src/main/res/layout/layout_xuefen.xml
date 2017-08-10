@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#fff"
+            skin:enable="true"
+        android:background="@color/skin_item_text_bg"
         android:padding="5dp">
 
         <TextView
@@ -25,7 +27,8 @@
             android:drawablePadding="2dp"
             android:gravity="center"
             android:text="上海"
-            android:textColor="#000"
+            skin:enable="true"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="15sp"
             android:visibility="invisible" />
 
@@ -35,7 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="学分绩点"
-            android:textColor="#000"
+            skin:enable="true"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="20sp" />
 
         <ImageButton
@@ -64,7 +68,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="要求总学分" />
 
@@ -73,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="已修课程学分" />
 
@@ -82,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="已修实践学分" />
             </TableRow>
@@ -97,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -107,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -117,7 +126,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
             </TableRow>
@@ -127,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
-            android:background="#000000" />
+            android:background="@color/skin_item_text_color" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -145,7 +155,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="GPA" />
 
@@ -154,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="GPA班级排名" />
 
@@ -163,7 +175,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="GPA专业排名" />
             </TableRow>
@@ -178,7 +191,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -188,7 +202,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -198,7 +213,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
             </TableRow>
@@ -208,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
-            android:background="#000000" />
+            android:background="@color/skin_item_text_color" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -226,8 +242,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
+                    skin:enable="true"
                     android:text="加权学分成绩" />
 
                 <TextView
@@ -235,8 +252,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
+                    skin:enable="true"
                     android:text="加权班级排名" />
 
                 <TextView
@@ -244,8 +262,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
+                    skin:enable="true"
                     android:text="加权专业排名" />
             </TableRow>
 
@@ -258,8 +277,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
+                    skin:enable="true"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -269,7 +289,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -279,7 +300,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
             </TableRow>
@@ -289,7 +311,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="20dp"
-            android:background="#000000" />
+            android:background="@color/skin_item_text_color" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -307,7 +329,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="平均成绩" />
 
@@ -316,7 +339,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="班级排名" />
 
@@ -325,7 +349,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="专业排名" />
             </TableRow>
@@ -340,7 +365,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -350,7 +376,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
 
@@ -360,7 +387,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0.5dp"
                     android:layout_weight="1"
-                    android:background="#ffffff"
+                    skin:enable="true"
+                    android:background="@color/skin_item_text_bg"
                     android:gravity="center"
                     android:text="0" />
             </TableRow>

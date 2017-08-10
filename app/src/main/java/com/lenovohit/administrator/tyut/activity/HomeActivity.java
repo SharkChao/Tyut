@@ -2,6 +2,7 @@ package com.lenovohit.administrator.tyut.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -11,6 +12,13 @@ import android.widget.TextView;
 import com.lenovohit.administrator.tyut.R;
 import com.lenovohit.administrator.tyut.adapter.MyBasePageAdapter;
 import com.lenovohit.administrator.tyut.views.Alert;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import butterknife.Bind;
 import cn.bmob.v3.update.BmobUpdateAgent;
@@ -42,6 +50,11 @@ public class HomeActivity extends BaseActivity {
         //检测我的应用是否需要更新
         BmobUpdateAgent.setUpdateOnlyWifi(true);
         BmobUpdateAgent.update(this);
+        //将皮肤包放置到sd卡的根目录下
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            CopyAssets("BlackFantacy.skin","");
+
+        }
     }
 
     @Override
@@ -107,5 +120,60 @@ public class HomeActivity extends BaseActivity {
                 alert.dismiss();
             }
         }).show();
+    }
+    private void CopyAssets(String assetDir,String dir) {
+        String[] files;
+        try {
+            files = this.getResources().getAssets().list(assetDir);
+        } catch (IOException e1) {
+            return;
+        }
+        File mWorkingPath = new File(dir);
+        File sdCardDir = Environment.getExternalStorageDirectory();//获取SDCard目录
+        File saveFile = new File(sdCardDir, "BlackFantacy.skin");
+        //if this directory does not exists, make one.
+        if (!mWorkingPath.exists()) {
+            if (!mWorkingPath.mkdirs()) {
+
+            }
+        }
+
+        for (int i = 0; i < files.length; i++) {
+            try {
+                String fileName = files[i];
+                //we make sure file name not contains '.' to be a folder.
+                if (!fileName.contains(".")) {
+                    if (0 == assetDir.length()) {
+                        CopyAssets(fileName, dir + fileName + "/");
+                    } else {
+                        CopyAssets(assetDir + "/" + fileName, dir + fileName + "/");
+                    }
+                    continue;
+                }
+                File outFile = new File(mWorkingPath, fileName);
+                if (saveFile.exists())
+                    saveFile.delete();
+                InputStream in = null;
+                if (0 != assetDir.length())
+                    in = getAssets().open(assetDir + "/" + fileName);
+                else
+                    in = getAssets().open(fileName);
+                OutputStream out = new FileOutputStream(saveFile);
+
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+
+                in.close();
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

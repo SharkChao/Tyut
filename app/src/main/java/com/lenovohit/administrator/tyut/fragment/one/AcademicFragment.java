@@ -95,7 +95,7 @@ public class AcademicFragment extends BaseFragment implements SwipeRefreshLayout
     public void onRefresh() {
         //还没有数据，先从网络加载数据（需要context）
         Context context1 = context.getApplicationContext();
-        ((MyApp) context1).getActivityComponent().inject(this);
+
         NewsUtil newsUtil = new NewsUtil();
         newsUtil.setNewsData(this.context, service, Constant.BASE_URL + Constant.STUDY_URL, 3);
     }

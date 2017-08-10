@@ -39,7 +39,7 @@ import javax.inject.Inject;
  * 本学期课表
  */
 
-public class KeBiaoActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class   KeBiaoActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     @Inject
     UserService service;
     private LinearLayout ll1;

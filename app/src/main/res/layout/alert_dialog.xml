@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lLayout_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/alert_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/txt_title"
@@ -16,6 +17,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="18sp"
+        skin:enable="true"
         android:textStyle="bold" />
 
     <TextView
@@ -26,6 +28,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:gravity="center"
+        skin:enable="true"
         android:textColor="@color/black"
         android:textSize="16sp" />
 

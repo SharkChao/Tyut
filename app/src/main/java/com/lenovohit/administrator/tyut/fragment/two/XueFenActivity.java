@@ -93,7 +93,7 @@ public class XueFenActivity extends BaseActivity implements SwipeRefreshLayout.O
         xueFenDao = session.getXueFenDao();
         List<XueFen>list= queryXueFen();
         if (list.size()==0){
-            ScoreUtil.getXueFenLogin(service,getApplicationContext());
+            ScoreUtil.getXueFenLogin(service,XueFenActivity.this);
             Toast.makeText(XueFenActivity.this,"第一次进入时，数据库中没有数据",Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(XueFenActivity.this,"直接从本地数据库中拿的数据",Toast.LENGTH_SHORT).show();

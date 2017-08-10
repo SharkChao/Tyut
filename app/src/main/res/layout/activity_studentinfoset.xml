@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#fff"
+        android:background="@color/skin_item_text_bg"
+        skin:enable="true"
         android:padding="5dp">
 
         <TextView
@@ -16,8 +19,9 @@
             android:drawablePadding="2dp"
             android:gravity="center"
             android:text="上海"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="15sp"
+            skin:enable="true"
             android:visibility="invisible" />
 
         <TextView
@@ -26,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="设置个人信息"
-            android:textColor="#000"
+            skin:enable="true"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="20sp" />
 
         <ImageButton
@@ -49,8 +54,9 @@
             android:layout_height="wrap_content"
             android:text="请完善个人信息"
             android:background="#f00"
-            android:textColor="#fff"
+            android:textColor="@color/skin_item_text_bg"
             android:textSize="20sp"
+            skin:enable="true"
             android:padding="5dp"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,7 +148,8 @@
             android:layout_height="wrap_content"
             android:text="请完善班级信息"
             android:layout_marginTop="10dp"
-            android:textColor="#fff"
+            android:textColor="@color/skin_item_text_bg"
+            skin:enable="true"
             android:background="#f00"
             android:textSize="20sp"
             android:padding="5dp"/>

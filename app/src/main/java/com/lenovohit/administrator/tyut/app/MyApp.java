@@ -14,6 +14,7 @@ import com.lenovohit.administrator.tyut.utils.GlideImageLoader;
 import com.orhanobut.logger.LogLevel;
 
 import cn.bmob.v3.Bmob;
+import cn.feng.skin.manager.loader.SkinManager;
 import cn.finalteam.galleryfinal.BuildConfig;
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -42,10 +43,8 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        SkinCompatManager.init(this)                          // 基础控件换肤初始化
-//                .addInflater(new SkinMaterialViewInflater())  // material design 控件换肤初始化[可选]
-//                .addInflater(new SkinCardViewInflater())      // CardView 控件换肤初始化[可选]
-//                .loadSkin();
+//      SkinManager.getInstance().init(this);
+//        SkinManager.getInstance().load();
         initLogger();
         AppComponent appComponent = DaggerAppComponent.builder().appModule(new AppModule()).build();
         activityComponent=  DaggerActivityComponent.builder().appComponent(appComponent).activityModule(new ActivityModule(Constant.LoginUrl,this)).build();
@@ -57,6 +56,9 @@ public class MyApp extends Application {
         ThemeConfig theme = new ThemeConfig.Builder()
         .build();
 //配置功能
+//        SkinManager.getInstance().init(this);
+        SkinManager.getInstance().init(this);
+        SkinManager.getInstance().load();
         FunctionConfig functionConfig = new FunctionConfig.Builder()
                 .setEnableCamera(true)
                 .setEnableEdit(true)

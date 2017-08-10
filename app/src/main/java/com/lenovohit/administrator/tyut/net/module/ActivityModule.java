@@ -8,17 +8,23 @@ import com.lenovohit.administrator.tyut.net.scope.ActivityScope;
 import com.lenovohit.administrator.tyut.net.service.UserService;
 import com.lenovohit.administrator.tyut.utils.CookieManager;
 import com.lenovohit.administrator.tyut.utils.FileUtils;
+import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -99,7 +105,17 @@ public class ActivityModule {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //打印日志
 
-//                .addInterceptor(interceptor)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request();
+                        Request.Builder requestBuilder = request.newBuilder();
+                        request = requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=GBK"),
+                                URLDecoder.decode(bodyToString(request.body()), "UTF-8")))
+                                .build();
+                        return chain.proceed(request);
+                    }
+                })
 
                 //设置Cache目录
 //                .cache(cache(context))
@@ -115,5 +131,31 @@ public class ActivityModule {
                 .cookieJar(new CookieManager(context))
                 .build();
         return  okHttpClient;
+    }
+
+    private static String bodyToString(final RequestBody request) {
+        try {
+            final RequestBody copy = request;
+            final Buffer buffer = new Buffer();
+            if (copy != null)
+                copy.writeTo(buffer);
+            else
+                return "";
+            return buffer.readUtf8();
+        } catch (final IOException e) {
+            return "did not work";
+        }
+    }
+    class LoggingInterceptor implements Interceptor {
+
+        @Override
+        public Response intercept(Interceptor.Chain chain) throws IOException {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            for (int i = 0; i < request.headers().size(); i++) {
+                Logger.d(request.headers().value(i));
+            }
+            return response;
+        }
     }
 }

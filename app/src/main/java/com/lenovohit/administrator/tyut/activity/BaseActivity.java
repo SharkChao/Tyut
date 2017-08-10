@@ -2,7 +2,6 @@ package com.lenovohit.administrator.tyut.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
 import com.lenovohit.administrator.tyut.app.AppManager;
@@ -10,12 +9,13 @@ import com.lenovohit.administrator.tyut.receiver.NetStateReceiver;
 import com.lenovohit.administrator.tyut.receiver.Observer;
 
 import butterknife.ButterKnife;
+import cn.feng.skin.manager.base.BaseFragmentActivity;
 
 /**
  * Created by Administrator on 2017/2/21.
  */
 
-public abstract class BaseActivity extends FragmentActivity implements Observer{
+public abstract class BaseActivity extends BaseFragmentActivity implements Observer{
 
     public static Activity currentActivity;
     private NetStateReceiver receiver;

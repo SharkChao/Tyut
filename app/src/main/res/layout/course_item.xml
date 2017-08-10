@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/list_item_selector"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/tvId"
         android:layout_width="60dp"
@@ -15,7 +15,8 @@
         android:text="1"
         android:textSize="15sp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/skin_item_text_bg"
+        skin:enable="true"
         android:background="#f00"
         />
     <LinearLayout
@@ -80,8 +81,9 @@
                 android:layout_height="wrap_content"
                 android:text="查看详情"
                 android:textSize="@dimen/font_size_B"
-                android:textColor="@color/white"
+                android:textColor="@color/skin_item_text_bg"
                 android:background="@drawable/button_select"
+                skin:enable="true"
                 android:paddingTop="@dimen/app_interval_5"
                 android:paddingBottom="@dimen/app_interval_5"
                 android:paddingLeft="@dimen/app_interval_10"

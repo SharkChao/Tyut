@@ -130,6 +130,7 @@ android {
         compile 'com.prolificinteractive:material-calendarview:1.4.2'
         compile 'com.orhanobut:logger:1.15'
         compile 'com.github.ganfra:material-spinner:1.1.1'
+        compile 'com.zhy:changeskin:3.0.0'
     }
 }
 dependencies {

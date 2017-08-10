@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lenovohit.administrator.tyut">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,7 +27,21 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <!-- 如果使用积分墙广告,还需要配置下面权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 以下为可选权限 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -102,6 +117,8 @@
         <activity android:name=".fragment.two.XuanKeGuanLiActivity"></activity>
         <activity android:name=".fragment.two.CengKeActivity"></activity>
         <activity android:name=".fragment.two.CengKeDetailActivity"></activity>
+        <activity android:name=".fragment.three.GroupActivity"></activity>
+        <activity android:name=".fragment.three.PublicActivity"></activity>
     </application>
 
 </manifest>

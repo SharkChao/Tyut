@@ -48,7 +48,7 @@ public class PingJiaoDetailActivity extends BaseActivity {
         tvCoursename.setText(pingJiao.getCoursename());
         tvTeachername.setText(pingJiao.getTeachername());
         tvSex.setText(pingJiao.getSex());
-        tvXuefen.setText(pingJiao.getXuefen());
+        tvXuefen.setText(pingJiao.getXuefen()+" 学分");
     }
 
     @Override

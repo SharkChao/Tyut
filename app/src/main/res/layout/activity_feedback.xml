@@ -2,16 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:skin="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#fffff0"
-    >
+    skin:enable="true"
+    android:background="@color/skin_item_text_bg">
 
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#fff"
+        skin:enable="true"
+        android:background="@color/skin_item_text_bg"
         android:padding="5dp">
 
         <TextView
@@ -20,8 +22,9 @@
             android:drawablePadding="2dp"
             android:gravity="center"
             android:text="上海"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="15sp"
+            skin:enable="true"
             android:visibility="invisible" />
 
         <TextView
@@ -30,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="意见反馈"
-            android:textColor="#000"
+            skin:enable="true"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="20sp" />
 
         <ImageButton
@@ -47,7 +51,8 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:paddingTop="30dp"
-        android:background="#fff"
+        skin:enable="true"
+        android:background="@color/skin_item_text_bg"
         android:orientation="horizontal">
 
         <EditText
@@ -69,8 +74,9 @@
             android:layout_height="80dp"
             android:padding="5dp"
             android:gravity="center"
-            android:textColor="#fff"
+            android:textColor="@color/skin_item_text_bg"
             android:textSize="17sp"
+            skin:enable="true"
             android:background="@drawable/button_select"
             android:text="提交反馈"/>
     </LinearLayout>

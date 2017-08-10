@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:skin="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#fff"
+        skin:enable="true"
+        android:background="@color/skin_item_text_bg"
         android:padding="5dp">
 
         <TextView
@@ -17,8 +20,9 @@
             android:drawablePadding="2dp"
             android:gravity="center"
             android:text="上海"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
             android:textSize="15sp"
+            skin:enable="true"
             android:visibility="invisible" />
 
         <TextView
@@ -27,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="课程查询"
-            android:textColor="#000"
+            android:textColor="@color/skin_item_text_color"
+            skin:enable="true"
             android:textSize="20sp" />
 
         <ImageButton
@@ -58,18 +63,25 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="搜索"
-            android:textColor="#fff"
+            android:textColor="@color/skin_item_text_bg"
             android:background="@drawable/button_select"/>
     </LinearLayout>
 
     <com.lenovohit.administrator.tyut.views.NiceSpinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:textColor="#000"
+        android:textColor="@color/skin_item_text_color"
+        skin:enable="true"
         android:layout_height="wrap_content" />
-    <ListView
-        android:id="@+id/lvList"
-        android:layout_marginTop="5dp"
+    <com.lenovohit.administrator.tyut.views.RefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        >
+        <ListView
+            android:id="@+id/lvList"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </com.lenovohit.administrator.tyut.views.RefreshLayout>
 </LinearLayout>

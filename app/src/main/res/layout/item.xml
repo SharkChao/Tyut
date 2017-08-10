@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:layout_marginTop="1dp"
-    android:layout_marginLeft="1dp"
-    android:orientation="vertical"
-	>
+	android:layout_width="50dp"
+	android:layout_height="50dp"
+	xmlns:skin="http://schemas.android.com/apk/res-auto"
+	android:layout_marginTop="1dp"
+	android:layout_marginLeft="1dp"
+	android:orientation="vertical">
     <TextView
         android:id="@+id/title" 
         android:layout_width="fill_parent"
@@ -13,6 +13,7 @@
     	android:layout_centerInParent="true"
 		android:gravity="center"
 		android:text="计算机与网络"
-    	android:textColor="#ffffff"
+		skin:enable="true"
+    	android:textColor="@color/skin_item_text_bg"
     	android:textSize="10sp"/>
 </RelativeLayout>

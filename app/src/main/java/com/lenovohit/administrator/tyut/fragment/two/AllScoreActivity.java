@@ -110,7 +110,7 @@ public class AllScoreActivity extends BaseActivity implements SwipeRefreshLayout
                 swipeRefreshLayout.setRefreshing(false);
                 Toast.makeText(this, "刷新成功！", Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(AllScoreActivity.this,"直接从数据库中拿所有学期成绩",Toast.LENGTH_LONG).show();
+//            Toast.makeText(AllScoreActivity.this,"直接从数据库中拿所有学期成绩",Toast.LENGTH_LONG).show();
         }
     }
 
